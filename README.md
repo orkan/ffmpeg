@@ -1,6 +1,6 @@
-![ffmpeg-logo](https://user-images.githubusercontent.com/129182/109426425-fdf78800-79ed-11eb-934b-6aac6bc56d18.jpg)
+![ffmpeg-logo](https://user-images.githubusercontent.com/129182/109426413-f506b680-79ed-11eb-9792-c09119ed708a.jpg)
 
-# ffmpeg (W)indows (C)ontext (T)ools
+# ffmpeg (W)indows (C)ontext (T)ools `v1.1.0`
 Convert your media files quickly with: Right click > "Send to" menu.
 
 ---
@@ -43,10 +43,13 @@ The ffmpeg configuration is stored in `src\_config.bat` You can create your own 
 
 ## About
 ### Requirements
-* [ffmpeg](https://ffmpeg.org/)
+* [ffmpeg.exe](https://ffmpeg.org/)
 
 ### Author
 [Orkan](https://github.com/orkan)
+
+### Updated
+Sun, 16 May 2021 19:28:12 +02:00
 
 ### License
 GNU General Public License v3.0

@@ -1,16 +1,19 @@
 @echo off
-REM Tip: Status codes https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+REM =================================================
+REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021 Orkan
+REM -------------------------------------------------
+REM This file is part of orkan/ffmpeg package
+REM https://github.com/orkan/ffmpeg
+REM =================================================
 
-if "%ERRORLEVEL%" == "" set ERRORLEVEL=0
-set EXTRA=%1
+REM Tip: Status codes https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
 
 echo.
 if %ERRORLEVEL% == 0 (
 	echo BUILD SUCCESSFUL
-	if "%EXTRA%" == "quit_on_success" goto :eof
+	if "%~1" == "quit_on_success" goto :eof
 ) else (
-	echo BUILD FAILED [Error: %ERRORLEVEL%]
+	echo BUILD FAILED ^(%ERRORLEVEL%^)
 )
-
 echo.
 pause

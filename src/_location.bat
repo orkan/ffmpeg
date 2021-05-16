@@ -1,5 +1,10 @@
 @echo off
-setlocal
+REM =================================================
+REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021 Orkan
+REM -------------------------------------------------
+REM This file is part of orkan/ffmpeg package
+REM https://github.com/orkan/ffmpeg
+REM =================================================
 
 REM Show all
 REM ffprobe -show_format video-xyz.mov
@@ -32,8 +37,4 @@ REM [/FORMAT]
 
 REM Command: --------------------------------------------------
 REM Display only location string from metadata
-set COMMAND=ffprobe -v quiet -print_format compact=print_section=0:nokey=1:escape=csv -show_entries format_tags=location "%~1"
-
-pushd %~dp0
-call %COMMAND%
-popd
+call %~dp0ffprobe -v quiet -print_format compact=print_section=0:nokey=1:escape=csv -show_entries format_tags=location "%~1"

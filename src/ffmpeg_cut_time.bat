@@ -1,17 +1,24 @@
 @echo off
+REM =================================================
+REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021 Orkan
+REM -------------------------------------------------
+REM This file is part of orkan/ffmpeg package
+REM https://github.com/orkan/ffmpeg
+REM =================================================
+
 setlocal
+pushd %~dp0
 call _config.bat
 call _header.bat "%~nx0"
 
-echo ***************************************************
+echo ***************************************************************
 echo   Cut video by start/end timestamps
-echo.
-echo   Usage  : %~nx0 infile [start] [end] [outfile]
-echo   Note   : [start] and [end] are optional, use "" if empty
+echo   Usage  : %~nx0 ^<infile^> [start] [end] [outfile]
+echo   Note   : [start] and [end] are optional, use "" for defaults
 echo   Example: %~nx0 "infile.mp4" 10:08 1:25:18
-echo ***************************************************
+echo ***************************************************************
 
-REM Import: --------------------------------------------
+REM Import: -------------------------------------------
 set INFILE=%~1
 set SS=%~2
 set TO=%~3
@@ -23,6 +30,10 @@ echo INFILE  : [%INFILE%]
 echo SS      : [%SS%]
 echo TO      : [%TO%]
 echo OUTFILE : [%OUTFILE%]
+echo.
+
+REM Verify: --------------------------------------------
+call _inputfile.bat "%INFILE%" silent || goto :end
 
 REM Config: --------------------------------------------
 set SS=-ss %SS%
@@ -69,11 +80,12 @@ REM https://wjwoodrow.wordpress.com/2013/02/04/correcting-for-audiovideo-sync-is
 REM https://superuser.com/questions/138331/using-ffmpeg-to-cut-up-video
 call ffmpeg -y -i "%INFILE%" %SS% %TO% -map 0:v -map 0:a:0 -map 0:a:1? -c copy %METAS% "%OUTFILE%"
 
-REM Remember ffmpeg error b/c of following [del]!
-set LAST_FFMPEG_ERROR=%ERRORLEVEL%
-
+set LAST_ERRORLEVEL=%ERRORLEVEL%
 del "%WAIT_FILE%"
-exit /b %LAST_FFMPEG_ERROR%
+
+REM Finalize: ------------------------------------------
+:end
+exit /b %LAST_ERRORLEVEL%
 
 REM Functions: -----------------------------------------
 :waitSleep

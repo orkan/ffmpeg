@@ -11,33 +11,37 @@ pushd %~dp0
 call _config.bat reload
 call _header.bat "%~nx0"
 
-echo ************************************
-echo    Tool: Video to MP4
-echo   Usage: %~nx0 ^<infile^>
-echo ************************************
+echo *************************************************************
+echo    Tool: Video subtitles
+echo   Usage: %~nx0 ^<infile^> [subtitles: infile.srt]
+echo *************************************************************
 
 REM Import: -------------------------------------------
 set INFILE=%~1
+set SUBTITLES=%~2
 
 REM Display: ------------------------------------------
 echo Inputs:
-echo INFILE: "%INFILE%"
+echo INFILE   : "%INFILE%"
+echo SUBTITLES: "%SUBTITLES%"
 echo.
 
 REM Verify: --------------------------------------------
 call _inputfile.bat "%INFILE%" silent || goto :end
+if "%SUBTITLES%" == "" set SUBTITLES=%~dpn1.srt
+if not exist "%SUBTITLES%" (
+	echo File not found: "%SUBTITLES%"
+	set ERRORLEVEL=404
+	goto :end
+)
 
-REM User: ----------------------------------------------
-set /p CRF=CRF value [quality 0(hi)-51(low): 23]: 
-echo Extra options:
-echo - video size: -s hd720 (1280x720), -s pal (720x576)
-echo - video filter: -vf fps=30,eq=brightness=0.04,crop=1280:536:0:93
-echo - audio AC3 to AAC: -map v:0 -map a:0 -c:a aac -ac 2 -ar 44100 -ab 192k -c:v copy
-set /p EXTRA=EXTRA [-c:a copy]: 
+REM Config: --------------------------------------------
+set OUTFILE=%~dpn1.[sub]%~x1
+set METAS=%META_GLOBAL% -metadata comment="%~nx0 : '%~nx1' -c:s mov_text %META_USER_COMMENT%"
 
 REM Command: -------------------------------------------
-echo.
-call ffmpeg_mp4.bat "%INFILE%" "%CRF%" "%EXTRA%"
+REM https://www.nikse.dk/subtitleedit/AddSubtitlesToVideo
+call ffmpeg -y -i "%INFILE%" -i "%SUBTITLES%" -c:v copy -c:a copy -c:s mov_text %METAS% "%OUTFILE%"
 
 REM Finalize: ------------------------------------------
 :end

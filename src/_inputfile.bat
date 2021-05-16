@@ -1,12 +1,19 @@
 @echo off
-setlocal
+REM =================================================
+REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021 Orkan
+REM -------------------------------------------------
+REM This file is part of orkan/ffmpeg package
+REM https://github.com/orkan/ffmpeg
+REM =================================================
 
-REM Import: -------------------------------------------------
+REM Import: -------------------------------------------
+setlocal
 set INPUT=%~1
 set EXTRA=%2
 
+REM Verify: --------------------------------------------
 if "%INPUT%" == "" (
-	echo Error: Empty input
+	echo Error: Empty arg 1
 	exit /b 400
 )
 if not exist "%INPUT%" (
@@ -16,8 +23,9 @@ if not exist "%INPUT%" (
 	echo Error: File not found "%INPUT%"
 	exit /b 404
 )
-if "%EXTRA%" == "silent" (
-	exit /b
-)
 
-echo File: %INPUT%
+:end
+if "%EXTRA%" NEQ "silent" (
+	echo File: "%INPUT%"
+)
+exit /b %ERRORLEVEL%

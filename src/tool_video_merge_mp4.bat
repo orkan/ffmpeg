@@ -1,12 +1,20 @@
 @echo off
+REM =================================================
+REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021 Orkan
+REM -------------------------------------------------
+REM This file is part of orkan/ffmpeg package
+REM https://github.com/orkan/ffmpeg
+REM =================================================
+
 setlocal
+pushd %~dp0
 call _config.bat reload
 call _header.bat "%~nx0"
 
-echo ***************************************************
+echo ******************************************
 echo   Tool: Merge MP4 Videos
 echo   Note: Only ACC sound in MP4 is supported
-echo ***************************************************
+echo ******************************************
 echo.
 
 REM Dirs setup: ----------------------------------------
@@ -60,7 +68,7 @@ del %TODEL%
 REM Finalize: ------------------------------------------
 :end
 call _status.bat
-exit /b
+exit /b %ERRORLEVEL%
 
 REM Functions: -----------------------------------------
 :toIntermediate

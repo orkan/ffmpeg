@@ -1,31 +1,43 @@
 @echo off
+REM =================================================
+REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021 Orkan
+REM -------------------------------------------------
+REM This file is part of orkan/ffmpeg package
+REM https://github.com/orkan/ffmpeg
+REM =================================================
+
 setlocal
+pushd %~dp0
 call _config.bat
 call _header.bat "%~nx0"
 
-echo ***************************************************
+echo *****************************************************************************************
 echo   Video to MP4
-echo   Usage: %~nx0 infile [quality 0(hi)-51(low): %DEFAULT_H264_CRF%] [extra: %DEFAULT_H264_EXT%] [outfile]
-echo ***************************************************
+echo   Usage: %~nx0 ^<infile^> [quality 0(hi)-51(low): %DEFAULT_H264_CRF%] [extra: %DEFAULT_H264_EXT%] [outfile]
+echo *****************************************************************************************
 
-REM Config: --------------------------------------------
+REM Import: -------------------------------------------
 set INFILE=%~1
 set CRF=%~2
 set EXT=%~3
 set OUTFILE=%~4
 
+REM Display: ------------------------------------------
 echo Inputs:
 echo INFILE  : [%INFILE%]
 echo CRF     : [%CRF%]
 echo EXT     : [%EXT%]
 echo OUTFILE : [%OUTFILE%]
+echo.
 
+REM Verify: --------------------------------------------
+call _inputfile.bat "%INFILE%" silent || goto :end
+
+REM Config: --------------------------------------------
 set CRF=-crf %CRF%
-
 if "%CRF%" == "-crf " set CRF=-crf %DEFAULT_H264_CRF%
 if "%EXT%" == ""      set EXT=%DEFAULT_H264_EXT%
 
-REM Extra options: -------------------------------------
 set EXT_STR=%EXT%
 set EXT_STR=%EXT_STR::=%
 set EXT_STR=%EXT_STR:?=%
@@ -43,4 +55,6 @@ set METAS=%META_GLOBAL% -metadata description="%META_LOCATION%" -metadata commen
 REM Command: -------------------------------------------
 call ffmpeg -y -i "%INFILE%" -c:v libx264 %DEFAULT_H264% %CRF% %EXT% %METAS% "%OUTFILE%"
 
-exit /b
+REM Finalize: ------------------------------------------
+:end
+exit /b %ERRORLEVEL%
