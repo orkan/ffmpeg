@@ -22,7 +22,4 @@ pushd %FFMPEG_HOME%
 set APP=%CD%\%FFPROBE_EXE%
 popd
 
-if "%FFMPEG_DEBUG%" == "" (
-	REM No echo please!!!
-	%APP% %*
-)
+%APP% %*

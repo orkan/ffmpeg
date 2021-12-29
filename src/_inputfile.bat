@@ -14,6 +14,7 @@ set EXTRA=%2
 REM Verify: --------------------------------------------
 if "%INPUT%" == "" (
 	echo Error: Empty arg 1
+	pause
 	exit /b 400
 )
 if not exist "%INPUT%" (
@@ -21,6 +22,7 @@ if not exist "%INPUT%" (
 	REM for %%^" in ("") do echo Error: File not found: %%~"[%INPUT%]%%~"
 	REM Parentheses in filename! Will use double-quotes for now...
 	echo Error: File not found "%INPUT%"
+	pause
 	exit /b 404
 )
 
