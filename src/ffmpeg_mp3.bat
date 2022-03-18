@@ -1,6 +1,6 @@
 @echo off
 REM =================================================
-REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021 Orkan
+REM ffmpeg (W)indows (C)ontext (T)ools (c) 2022 Orkan
 REM -------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM https://github.com/orkan/ffmpeg
@@ -16,7 +16,7 @@ call _header.bat "%~nx0"
 
 echo *************************************************************************
 echo  Any to MP3
-echo  Usage: %~nx0 ^<infile^> [bitrate: %DEFAULT_MP3_BRATE%] [sample: %DEFAULT_MP3_SRATE%] [outfile]
+echo  Usage: %~nx0 ^<infile^> [bitrate: %DEFAULT_MP3_BRATE%] [sample: %DEFAULT_MP3_SRATE%] [outfile/outdir]
 echo *************************************************************************
 
 REM Import: -------------------------------------------
@@ -27,10 +27,10 @@ set OUTFILE=%~4
 
 REM Display: ------------------------------------------
 echo Inputs:
-echo INFILE  : [%INFILE%]
-echo BRATE   : [%BRATE%]
-echo SRATE   : [%SRATE%]
-echo OUTFILE : [%OUTFILE%]
+echo INFILE  : "%INFILE%"
+echo BRATE   : "%BRATE%"
+echo SRATE   : "%SRATE%"
+echo OUTFILE : "%OUTFILE%"
 echo.
 
 REM Verify: --------------------------------------------
@@ -41,10 +41,12 @@ set BRATE=-b:a %BRATE%
 set SRATE=-ar %SRATE%
 if "%BRATE%" == "-b:a " set BRATE=-b:a %DEFAULT_MP3_BRATE%
 if "%SRATE%" == "-ar "  set SRATE=-ar %DEFAULT_MP3_SRATE%
-
 set BRATE_STR=%BRATE::=%
-if "%OUTFILE%" == "" (
-	set "OUTFILE=%~dpn1.[%BRATE_STR%][%SRATE%].mp3"
+
+set _OUTFILE="%OUTFILE%"
+call :set_OUTFILE "%INFILE%" "%OUTFILE%"
+if "%_OUTFILE%" NEQ "%OUTFILE%" (
+	echo OUTFILE : "%OUTFILE%"
 )
 
 set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%BRATE%] [%SRATE%] %META_USER_COMMENT%"
@@ -55,3 +57,17 @@ call ffmpeg -y -i "%INFILE%" -vn %BRATE% %SRATE% %METAS% "%OUTFILE%"
 REM Finalize: ------------------------------------------
 :end
 exit /b %ERRORLEVEL%
+
+REM FUNCTION::set_OUTFILE( infile, outfile ) --------
+:set_OUTFILE
+if "%2" == "" (
+	set "OUTFILE=%~dpn1.[%BRATE_STR%][%SRATE%].mp3"
+	goto :eof
+)
+REM Check if [outdir] Note: %~a2 won't work in if() clause
+set ATTR=%~a2
+set ATTR=%ATTR:~0,1%
+if /I "%ATTR%"=="d" (
+	set "OUTFILE=%OUTFILE%\%~n1.[%BRATE_STR%][%SRATE%].mp3"
+)
+goto :eof

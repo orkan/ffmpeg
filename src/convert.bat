@@ -1,6 +1,6 @@
 @echo off
 REM =================================================
-REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021 Orkan
+REM ffmpeg (W)indows (C)ontext (T)ools (c) 2022 Orkan
 REM -------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM https://github.com/orkan/ffmpeg
@@ -27,7 +27,8 @@ call :config %FILES% show || goto :end
 echo.
 set /p SHUTDOWN_USER=When done (s - shutdown ^| h - hibernate ^| [n] - nothing): 
 REM Warning: Empty input sets ERRORLEVEL=1
-set ERRORLEVEL=0
+REM set ERRORLEVEL=0 <-- do NOT replace pseudo with local variable! Instead:
+ver > nul
 
 call :config %FILES% run
 goto :end

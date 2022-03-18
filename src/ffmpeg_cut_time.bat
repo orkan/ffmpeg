@@ -1,6 +1,6 @@
 @echo off
 REM =================================================
-REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021 Orkan
+REM ffmpeg (W)indows (C)ontext (T)ools (c) 2022 Orkan
 REM -------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM https://github.com/orkan/ffmpeg
@@ -10,7 +10,6 @@ setlocal
 pushd %~dp0
 call _config.bat
 call _header.bat "%~nx0"
-for /f "tokens=1-7 delims=/.:, " %%a in ("%DATE%%TIME%") do set DATETIMESTR=%%c%%b%%a%%d%%e%%f%%g
 set LAST_ERRORLEVEL=0
 
 echo ***************************************************************
@@ -30,7 +29,7 @@ set OUTFILE=%~4
 set STREAMS=%~5
 set RECALL=%~6
 set WAIT_FILE=%~dpn0.lock
-set RECALL_FILE=%~dpn0.recall.%DATETIMESTR%.bat
+set RECALL_FILE=%~dpn0.recall%DATETIME%.bat
 
 REM Recall: --------------------------------------------
 REM Use "recall" file to remember command in case of system crash

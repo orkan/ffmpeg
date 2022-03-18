@@ -1,12 +1,17 @@
 @echo off
 REM =================================================
-REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021 Orkan
+REM ffmpeg (W)indows (C)ontext (T)ools (c) 2022 Orkan
 REM -------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM https://github.com/orkan/ffmpeg
 REM =================================================
 
 if "%1" NEQ "reload" if "%CONFIG_LOADED%" == "yes" exit /b
+
+REM Helpers: -------------------------------------------
+REM Create date-time unique string, eg. 2022011209032911
+set DATETIME=%DATE%.%TIME: =0%
+for /f "tokens=1-7 delims=/:.," %%a in ("%DATETIME%") do set DATETIME=%%c%%b%%a%%d%%e%%f%%g
 
 REM ffmpeg: --------------------------------------------
 set FFMPEG_HOME_DEF=%~dp0..\..\bin\ffmpeg-static
