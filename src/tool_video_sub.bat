@@ -22,7 +22,7 @@ set SUBTITLES=%~2
 
 REM Display: ------------------------------------------
 echo Inputs:
-echo INFILE   : "%INFILE%"
+echo    INFILE: "%INFILE%"
 echo SUBTITLES: "%SUBTITLES%"
 echo.
 

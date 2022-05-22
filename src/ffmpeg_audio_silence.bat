@@ -26,10 +26,10 @@ if "%RATE%" == "" set RATE=41000
 
 REM Display: ------------------------------------------
 echo Inputs:
-echo OUTFILE  : [%OUTFILE%]
-echo DURATION : [%DURATION%]
-echo CHANNELS : [%CHANNELS%]
-echo RATE     : [%RATE%]
+echo  OUTFILE: "%OUTFILE%"
+echo DURATION: "%DURATION%"
+echo CHANNELS: "%CHANNELS%"
+echo     RATE: "%RATE%"
 echo.
 
 REM Verify: --------------------------------------------

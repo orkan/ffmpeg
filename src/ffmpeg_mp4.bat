@@ -24,10 +24,10 @@ set OUTFILE=%~4
 
 REM Display: ------------------------------------------
 echo Inputs:
-echo INFILE  : [%INFILE%]
-echo CRF     : [%CRF%]
-echo EXT     : [%EXT%]
-echo OUTFILE : [%OUTFILE%]
+echo  INFILE: "%INFILE%"
+echo     CRF: "%CRF%"
+echo     EXT: "%EXT%"
+echo OUTFILE: "%OUTFILE%"
 echo.
 
 REM Verify: --------------------------------------------

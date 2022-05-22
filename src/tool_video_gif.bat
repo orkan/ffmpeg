@@ -12,7 +12,7 @@ call _config.bat reload
 call _header.bat "%~nx0"
 
 echo ************************************
-echo   Tool: Video to GIF
+echo    Tool: Video to GIF
 echo   Usage: %~nx0 ^<infile^>
 echo ************************************
 

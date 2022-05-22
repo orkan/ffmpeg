@@ -13,7 +13,7 @@ call _header.bat "%~nx0"
 
 echo ***********************************************************************************************
 echo   FFplay: Video to MP4 (WIP)
-echo   Usage: %~nx0 ^<infile^> [quality 0(hi)-51(low): %DEFAULT_H264_CRF%] [fps: original] [extra: %DEFAULT_H264_EXT%]
+echo    Usage: %~nx0 ^<infile^> [quality 0(hi)-51(low): %DEFAULT_H264_CRF%] [fps: original] [extra: %DEFAULT_H264_EXT%]
 echo ***********************************************************************************************
 
 REM Import: -------------------------------------------
@@ -24,10 +24,10 @@ set EXT=%~4
 
 REM Display: ------------------------------------------
 echo Inputs:
-echo INFILE  : [%INFILE%]
-echo CRF     : [%CRF%]
-echo FPS     : [%FPS%]
-echo EXT     : [%EXT%]
+echo INFILE: "%INFILE%"
+echo    CRF: "%CRF%"
+echo    FPS: "%FPS%"
+echo    EXT: "%EXT%"
 echo.
 
 REM Verify: --------------------------------------------

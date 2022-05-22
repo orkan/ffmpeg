@@ -13,7 +13,7 @@ call _header.bat "%~nx0"
 
 echo **************************************************************
 echo   Video to GIF + cut by start/end timestamps
-echo   Usage: %~nx0 ^<infile^> [start] [end] [outfile]
+echo     Usage: %~nx0 ^<infile^> [start] [end] [outfile]
 echo   Example: %~nx0 "video.mp4" 0:1.0 0:12.5 "video.gif"
 echo **************************************************************
 
@@ -25,10 +25,10 @@ set OUTFILE=%~4
 
 REM Display: -------------------------------------------
 echo Inputs:
-echo INFILE  : [%INFILE%]
-echo SS      : [%SS%]
-echo TO      : [%TO%]
-echo OUTFILE : [%OUTFILE%]
+echo  INFILE: "%INFILE%"
+echo      SS: "%SS%"
+echo      TO: "%TO%"
+echo OUTFILE: "%OUTFILE%"
 echo.
 
 REM Verify: --------------------------------------------

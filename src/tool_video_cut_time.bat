@@ -24,7 +24,7 @@ set STREAMS=%~4
 
 REM Display: ------------------------------------------
 echo Inputs:
-echo INFILE : "%INFILE%"
+echo  INFILE: "%INFILE%"
 echo OUTFILE: "%OUTFILE%"
 echo   EXTRA: "%EXTRA%"
 echo STREAMS: "%STREAMS%"
@@ -36,6 +36,10 @@ call _inputfile.bat "%INFILE%" silent || goto :end
 REM User: ----------------------------------------------
 set /p START=Start time [0:0:0]: 
 set /p END=End time [End of video]: 
+
+REM Treat spaces as : in time tags
+if "%START%" NEQ "" set START=%START: =:%
+if "%END%" NEQ "" set END=%END: =:%
 
 REM Command: -------------------------------------------
 echo.

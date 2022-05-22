@@ -10,12 +10,13 @@ setlocal
 pushd %~dp0
 call _config.bat
 call _header.bat "%~nx0"
+for /f "tokens=1-7 delims=/.:, " %%a in ("%DATE%%TIME%") do set DATETIMESTR=%%c%%b%%a%%d%%e%%f%%g
 set LAST_ERRORLEVEL=0
 
 echo ***************************************************************
 echo   Cut video by start/end timestamps
-echo   Usage  : %~nx0 ^<infile^> [start] [end] [outfile] [streams]
-echo   Note   : [start] and [end] are optional, use "" for defaults
+echo     Usage: %~nx0 ^<infile^> [start] [end] [outfile] [streams]
+echo      Note: [start] and [end] are optional, use "" for defaults
 echo   Example: %~nx0 "infile.mp4" 10:08 1:25:18
 echo ***************************************************************
 echo.
@@ -29,7 +30,7 @@ set OUTFILE=%~4
 set STREAMS=%~5
 set RECALL=%~6
 set WAIT_FILE=%~dpn0.lock
-set RECALL_FILE=%~dpn0.recall%DATETIME%.bat
+set RECALL_FILE=%~dpn0.recall.%DATETIMESTR%.bat
 
 REM Recall: --------------------------------------------
 REM Use "recall" file to remember command in case of system crash
@@ -42,11 +43,11 @@ if "%RECALL%" == "" (
 
 REM Display: -------------------------------------------
 echo Inputs:
-echo INFILE  : [%INFILE%]
-echo SS      : [%SS%]
-echo TO      : [%TO%]
-echo OUTFILE : [%OUTFILE%]
-echo STREAMS : [%STREAMS%]
+echo  INFILE: "%INFILE%"
+echo      SS: "%SS%"
+echo      TO: "%TO%"
+echo OUTFILE: "%OUTFILE%"
+echo STREAMS: "%STREAMS%"
 echo.
 
 REM Reset wait file? -----------------------------------
@@ -63,7 +64,7 @@ set SS=-ss %SS%
 set TO=-to %TO%
 if "%SS%" == "-ss " set SS=-ss 0
 if "%TO%" == "-to " set TO=
-if "%STREAMS%" == "" set STREAMS=-map 0:v -map 0:a:0 -map 0:a:1?
+if "%STREAMS%" == "" set STREAMS=-map 0:v -map 0:a:0 -map 0:a:1? -map 0:s:0?
 
 REM Strings: -------------------------------------------
 set SS_STR=%SS::=.%

@@ -26,9 +26,9 @@ set OUTFILE=%~3
 
 REM Display: -------------------------------------------
 echo Inputs:
-echo INFILE  : [%INFILE%]
-echo ROTATION: [%ROTATION%]
-echo OUTFILE : [%OUTFILE%]
+echo   INFILE: "%INFILE%"
+echo ROTATION: "%ROTATION%"
+echo  OUTFILE: "%OUTFILE%"
 echo.
 
 REM Verify: --------------------------------------------

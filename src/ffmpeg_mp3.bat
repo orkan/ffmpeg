@@ -27,10 +27,10 @@ set OUTFILE=%~4
 
 REM Display: ------------------------------------------
 echo Inputs:
-echo INFILE  : "%INFILE%"
-echo BRATE   : "%BRATE%"
-echo SRATE   : "%SRATE%"
-echo OUTFILE : "%OUTFILE%"
+echo  INFILE: "%INFILE%"
+echo   BRATE: "%BRATE%"
+echo   SRATE: "%SRATE%"
+echo OUTFILE: "%OUTFILE%"
 echo.
 
 REM Verify: --------------------------------------------
