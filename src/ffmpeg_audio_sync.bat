@@ -60,7 +60,9 @@ if "%OUTFILE%" == "" (
 
 set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%OFFSET% %MAP%] %META_USER_COMMENT%"
 
-REM Command: -------------------------------------------
+REM Run: -----------------------------------------------
+:run
+call _log.bat %~nx0 %*
 call ffmpeg -y -i "%INFILE%" %OFFSET% -i "%INFILE%" %MAP% -c copy %METAS% "%OUTFILE%"
 
 REM Finalize: ------------------------------------------

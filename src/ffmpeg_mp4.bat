@@ -52,7 +52,9 @@ for /f "tokens=*" %%x in ( 'call _location.bat "%INFILE%"' ) do set LOCATION=%%x
 if "%LOCATION%" NEQ "" set META_LOCATION=gps:[%LOCATION%]
 set METAS=%META_GLOBAL% -metadata description="%META_LOCATION%" -metadata comment="%~nx0 [%CRF%] [%EXT%] %META_USER_COMMENT%"
 
-REM Command: -------------------------------------------
+REM Run: -----------------------------------------------
+:run
+call _log.bat %~nx0 %*
 call ffmpeg -y -i "%INFILE%" -c:v libx264 %DEFAULT_H264% %CRF% %EXT% %METAS% "%OUTFILE%"
 
 REM Finalize: ------------------------------------------

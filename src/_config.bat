@@ -9,9 +9,14 @@ REM =================================================
 if "%1" NEQ "reload" if "%CONFIG_LOADED%" == "yes" exit /b
 
 REM Helpers: -------------------------------------------
+set APP_NAME=ffmpeg-WCT
+
 REM Create date-time unique string, eg. 2022011209032911
 set DATETIME=%DATE%.%TIME: =0%
 for /f "tokens=1-7 delims=/:.," %%a in ("%DATETIME%") do set DATETIME=%%c%%b%%a%%d%%e%%f%%g
+
+set LOG_DIR=%~dp0..\..\var\log
+if exist "%LOG_DIR%" set LOG_FILE=%LOG_DIR%\%APP_NAME%.log
 
 REM ffmpeg: --------------------------------------------
 set FFMPEG_HOME_DEF=%~dp0..\..\bin\ffmpeg-static

@@ -54,7 +54,9 @@ if "%OUTFILE%" == "" (
 set OUTFILE=%PATH1%.[%SS_STR%][%TO_STR%].gif
 set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%SS%] [%TO%] [-filter_complex ...] %META_USER_COMMENT%"
 
-REM Command: -------------------------------------------
+REM Run: -----------------------------------------------
+:run
+call _log.bat %~nx0 %*
 REM https://engineering.giphy.com/how-to-make-gifs-with-ffmpeg/
 call ffmpeg -y %SS% %TO% -i "%INFILE%" -filter_complex "[0:v] fps=12,scale=480:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" %METAS% "%OUTFILE%"
 

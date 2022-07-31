@@ -44,14 +44,16 @@ if "%SRATE%" == "-ar "  set SRATE=-ar %DEFAULT_MP3_SRATE%
 set BRATE_STR=%BRATE::=%
 
 set _OUTFILE="%OUTFILE%"
-call :set_OUTFILE "%INFILE%" "%OUTFILE%"
+call :setOUTFILE "%INFILE%" "%OUTFILE%"
 if "%_OUTFILE%" NEQ "%OUTFILE%" (
 	echo OUTFILE : "%OUTFILE%"
 )
 
 set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%BRATE%] [%SRATE%] %META_USER_COMMENT%"
 
-REM Command: -------------------------------------------
+REM Run: -----------------------------------------------
+:run
+call _log.bat %~nx0 %*
 call ffmpeg -y -i "%INFILE%" -vn %BRATE% %SRATE% %METAS% "%OUTFILE%"
 
 REM Finalize: ------------------------------------------
@@ -59,8 +61,8 @@ REM Finalize: ------------------------------------------
 exit /b %ERRORLEVEL%
 
 REM FUNCTION::set_OUTFILE( infile, outfile ) --------
-:set_OUTFILE
-if "%2" == "" (
+:setOUTFILE
+if "%~2" == "" (
 	set "OUTFILE=%~dpn1.[%BRATE_STR%][%SRATE%].mp3"
 	goto :eof
 )

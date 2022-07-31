@@ -44,7 +44,9 @@ if "%DURATION%" == "" (
 	goto :end
 )
 
-REM Command: -------------------------------------------
+REM Run: -----------------------------------------------
+:run
+call _log.bat %~nx0 %*
 call ffmpeg -y -f lavfi -i anullsrc=channel_layout=%CHANNELS%:sample_rate=%RATE% -t %DURATION% %OUTFILE%
 
 REM Finalize: ------------------------------------------

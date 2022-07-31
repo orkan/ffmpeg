@@ -51,7 +51,9 @@ if "%OUTFILE%" == "" (
 
 set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%ROTATE%] %META_USER_COMMENT%"
 
-REM Command: -------------------------------------------
+REM Run: -----------------------------------------------
+:run
+call _log.bat %~nx0 %*
 call ffmpeg -y -i "%INFILE%" -c copy %METAS% %ROTATE% "%OUTFILE%"
 
 REM Finalize: ------------------------------------------
