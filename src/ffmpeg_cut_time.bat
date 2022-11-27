@@ -14,8 +14,8 @@ call _header.bat "%~nx0"
 echo ***************************************************************
 echo   Cut video by start/end timestamps
 echo     Usage: %~nx0 ^<infile^> [start] [end] [outfile] [streams]
-echo      Note: [start] and [end] are optional, use "" for defaults
 echo   Example: %~nx0 "infile.mp4" 10:08 1:25:18
+echo      Note: [start] and [end] are optional, use "" for defaults
 echo ***************************************************************
 echo.
 
@@ -49,16 +49,16 @@ REM Verify: --------------------------------------------
 call _inputfile.bat "%INFILE%" silent || goto :end
 
 REM Config: --------------------------------------------
-set SS=-ss %SS%
-set TO=-to %TO%
-if "%SS%" == "-ss " set SS=-ss 0
-if "%TO%" == "-to " set TO=
+set SS_ARG=-ss %SS%
+set TO_ARG=-to %TO%
+if "%SS_ARG%" == "-ss " set SS_ARG=-ss 0
+if "%TO_ARG%" == "-to " set TO_ARG=
 if "%STREAMS%" == "" set STREAMS=-map 0:v -map 0:a:0 -map 0:a:1? -map 0:s:0?
 
 REM Strings: -------------------------------------------
-set SS_STR=%SS::=.%
-if "%TO%" NEQ "" (
-	set TO_STR=%TO::=.%
+set SS_STR=%SS_ARG::=.%
+if "%TO_ARG%" NEQ "" (
+	set TO_STR=%TO_ARG::=.%
 )
 
 REM Outfile: -------------------------------------------
@@ -74,7 +74,10 @@ if "%OUTFILE%" == "" (
 	set "OUT_FILENAME=%~nx4"
 	set "OUT_EXT=%~x4"
 )
-set OUTFILE=%OUT_PATH%%OUT_BASENAME%.[%SS_STR%][%TO_STR%]%OUT_EXT%
+set OUTNAME=%OUT_BASENAME%.[%SS_STR%][%TO_STR%]%OUT_EXT%
+set OUTFILE=%OUT_PATH%%OUTNAME%
+REM Segment:
+REM set OUTFILE=%OUT_PATH%%OUT_BASENAME%.[%SS_STR%][%TO_STR%][seg-%%%%03d]%OUT_EXT%
 
 REM Recall: --------------------------------------------
 REM Use "recall" file to remember command in case of system crash
@@ -89,24 +92,35 @@ if "%RECALL%" == "" (
 REM META tags: -----------------------------------------
 for /f "tokens=*" %%x in ( 'call _location.bat "%INFILE%"' ) do set LOCATION=%%x
 if "%LOCATION%" NEQ "" set META_LOCATION=gps:[%LOCATION%]
-set METAS=%META_GLOBAL% -metadata description="%META_LOCATION%" -metadata comment="%~nx0 [%SS%] [%TO%] %META_USER_COMMENT%"
+set METAS=%META_GLOBAL% -metadata description="%META_LOCATION%" -metadata comment="%~nx0 [%SS_ARG%] [%TO_ARG%] %META_USER_COMMENT%"
 
 REM Wait: -------------------------------------------
 REM Don't run multiple threads on the same time b/c of disk usage overhead
+set WAIT_TIME=4
+set WAIT_LOOP=0
+set WAIT_TOTAL=0
 :wait
 if not exist "%WAIT_FILE%" (
 	echo "%OUTFILE%" > "%WAIT_FILE%"
 	goto :run
 )
-call :waitSleep 4
+set /A WAIT_LOOP += 1
+set /A WAIT_TOTAL = WAIT_LOOP * WAIT_TIME
+TITLE Waiting %WAIT_TOTAL% sec...
+call :waitSleep %WAIT_TIME%
 goto :wait
 
 REM Run: -----------------------------------------------
 :run
+TITLE %OUTNAME%
 call _log.bat %~nx0 %*
 REM https://wjwoodrow.wordpress.com/2013/02/04/correcting-for-audiovideo-sync-issues-with-the-ffmpeg-programs-itsoffset-switch/
 REM https://superuser.com/questions/138331/using-ffmpeg-to-cut-up-video
-call ffmpeg -y -i "%INFILE%" %SS% %TO% %STREAMS% -c copy %METAS% "%OUTFILE%"
+REM https://stackoverflow.com/questions/14005110/how-to-split-a-video-using-ffmpeg-so-that-each-chunk-starts-with-a-key-frame
+call ffmpeg -y -i "%INFILE%" %SS_ARG% %TO_ARG% %STREAMS% -c copy %METAS% "%OUTFILE%"
+REM Segment:
+REM https://www.ffmpeg.org/ffmpeg-formats.html#toc-segment_002c-stream_005fsegment_002c-ssegment
+REM call ffmpeg -y -i "%INFILE%" %SS_ARG% %TO_ARG% -f segment -segment_time 999999 -reset_timestamps 1 %STREAMS% -c copy %METAS% "%OUTFILE%"
 set FFMPEG_ERRORLEVEL=%ERRORLEVEL%
 
 REM Finalize: ------------------------------------------
@@ -140,5 +154,7 @@ if %FFMPEG_ERRORLEVEL% == 0 (
 		del "%RECALL_FILE%"
 	)
 	call :waitEnd
+) else (
+	TITLE Error ^(%FFMPEG_ERRORLEVEL%^)
 )
 goto :eof
