@@ -20,9 +20,9 @@ echo   - make sure your video player can read this flag
 echo ********************************************************
 
 REM Import: -------------------------------------------
-set INFILE=%~1
-set ROTATION=%~2
-set OUTFILE=%~3
+set "INFILE=%~1"
+set "ROTATION=%~2"
+set "OUTFILE=%~3"
 
 REM Display: -------------------------------------------
 echo Inputs:

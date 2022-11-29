@@ -17,10 +17,10 @@ echo   Usage: %~nx0 ^<infile^> [quality 0(hi)-51(low): %DEFAULT_H264_CRF%] [extr
 echo *****************************************************************************************
 
 REM Import: -------------------------------------------
-set INFILE=%~1
-set CRF=%~2
-set EXT=%~3
-set OUTFILE=%~4
+set "INFILE=%~1"
+set "CRF=%~2"
+set "EXT=%~3"
+set "OUTFILE=%~4"
 
 REM Display: ------------------------------------------
 echo Inputs:

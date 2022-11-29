@@ -7,9 +7,10 @@ REM https://github.com/orkan/ffmpeg
 REM =================================================
 
 REM Import: -------------------------------------------
+REM Use double quotes to allow special chars in filename like: &()
 setlocal
-set INPUT=%~1
-set EXTRA=%2
+set "INPUT=%~1"
+set "EXTRA=%2"
 
 REM Verify: --------------------------------------------
 if "%INPUT%" == "" (

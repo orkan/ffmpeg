@@ -20,10 +20,10 @@ echo  Usage: %~nx0 ^<infile^> [bitrate: %DEFAULT_MP3_BRATE%] [sample: %DEFAULT_M
 echo *************************************************************************
 
 REM Import: -------------------------------------------
-set INFILE=%~1
-set BRATE=%~2
-set SRATE=%~3
-set OUTFILE=%~4
+set "INFILE=%~1"
+set "BRATE=%~2"
+set "SRATE=%~3"
+set "OUTFILE=%~4"
 
 REM Display: ------------------------------------------
 echo Inputs:

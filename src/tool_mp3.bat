@@ -17,9 +17,9 @@ echo   Usage: %~nx0 ^<infile^> [outfile] [quit_on_success]
 echo ************************************
 
 REM Import: -------------------------------------------
-set INFILE=%~1
-set OUTFILE=%~2
-set EXTRA=%~3
+set "INFILE=%~1"
+set "OUTFILE=%~2"
+set "EXTRA=%~3"
 
 REM Display: ------------------------------------------
 echo Inputs:

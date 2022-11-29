@@ -33,6 +33,11 @@ echo.
 set COMMAND=%APP% %*
 echo %COMMAND%
 
+if "%FFMPEG_ERROR%" NEQ "" (
+	echo FFMPEG exit with: [%FFMPEG_ERROR%]
+	exit /b %FFMPEG_ERROR%
+)
+
 if "%FFMPEG_DEBUG%" == "" (
 	echo.
 	%COMMAND%

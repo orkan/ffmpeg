@@ -17,8 +17,8 @@ echo   Usage: %~nx0 ^<infile^> [subtitles: infile.srt]
 echo *************************************************************
 
 REM Import: -------------------------------------------
-set INFILE=%~1
-set SUBTITLES=%~2
+set "INFILE=%~1"
+set "SUBTITLES=%~2"
 
 REM Display: ------------------------------------------
 echo Inputs:

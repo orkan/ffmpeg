@@ -18,10 +18,10 @@ echo   Example: %~nx0 "video.mp4" 0:1.0 0:12.5 "video.gif"
 echo **************************************************************
 
 REM Import: -------------------------------------------
-set INFILE=%~1
-set SS=%~2
-set TO=%~3
-set OUTFILE=%~4
+set "INFILE=%~1"
+set "SS=%~2"
+set "TO=%~3"
+set "OUTFILE=%~4"
 
 REM Display: -------------------------------------------
 echo Inputs:

@@ -17,10 +17,11 @@ echo   Usage: %~nx0 ^<outfile^> ^<duration^> [channels] [rate]
 echo ************************************************************************
 
 REM Import: -------------------------------------------
-set OUTFILE=%~1
-set DURATION=%2
-set CHANNELS=%3
-set RATE=%4
+set "OUTFILE=%~1"
+set "DURATION=%2"
+set "CHANNELS=%3"
+set "RATE=%4"
+
 if "%CHANNELS%" == "" set CHANNELS=2
 if "%RATE%" == "" set RATE=41000
 

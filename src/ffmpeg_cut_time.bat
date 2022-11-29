@@ -20,12 +20,12 @@ echo ***************************************************************
 echo.
 
 REM Import: -------------------------------------------
-set INFILE=%~1
-set SS=%~2
-set TO=%~3
-set OUTFILE=%~4
-set STREAMS=%~5
-set RECALL=%~6
+set "INFILE=%~1"
+set "SS=%~2"
+set "TO=%~3"
+set "OUTFILE=%~4"
+set "STREAMS=%~5"
+set "RECALL=%~6"
 
 set FFMPEG_ERRORLEVEL=0
 set WAIT_FILE=%~dpn0.lock

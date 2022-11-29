@@ -1,6 +1,6 @@
 ![ffmpeg-logo](https://user-images.githubusercontent.com/129182/109426413-f506b680-79ed-11eb-9792-c09119ed708a.jpg)
 
-# ffmpeg (W)indows (C)ontext (T)ools `v1.2.4`
+# ffmpeg (W)indows (C)ontext (T)ools `v1.2.5`
 Convert your media files quickly with: Right click > "Send to" menu.
 
 ---
@@ -49,7 +49,7 @@ The ffmpeg configuration is stored in `src\_config.bat` You can create your own 
 [Orkan](https://github.com/orkan)
 
 ### Updated
-Sun, 27 Nov 2022 19:49:57 +01:00
+Tue, 29 Nov 2022 21:23:00 +01:00
 
 ### License
 GNU General Public License v3.0
