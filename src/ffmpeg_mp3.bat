@@ -1,10 +1,10 @@
 @echo off
-REM =================================================
-REM ffmpeg (W)indows (C)ontext (T)ools (c) 2022 Orkan
-REM -------------------------------------------------
+REM ======================================================
+REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021-2023 Orkan
+REM ------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM https://github.com/orkan/ffmpeg
-REM =================================================
+REM ======================================================
 
 REM Convert audio files to mp3 using ffmpeg
 REM https://stackoverflow.com/a/12952172/166689

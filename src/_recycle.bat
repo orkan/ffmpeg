@@ -6,14 +6,20 @@ REM This file is part of orkan/ffmpeg package
 REM https://github.com/orkan/ffmpeg
 REM ======================================================
 
-REM Tip: Status codes https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+setlocal
+
+REM Import: -------------------------------------------
+set "INFILE=%~1"
+
+REM ---------------------------------------------------------
+REM Command:
+set COMMAND=%~dp0..\..\bin\Recycle.exe "%INFILE%"
 
 echo.
-if %ERRORLEVEL% == 0 (
-	echo BUILD SUCCESSFUL
-	if "%~1" == "quit_on_success" goto :eof
-) else (
-	echo BUILD FAILED ^(%ERRORLEVEL%^)
+echo %COMMAND%
+
+if "%FFMPEG_DEBUG%" == "" (
+	%COMMAND%
 )
-echo.
-pause
+
+exit /b %ERRORLEVEL%

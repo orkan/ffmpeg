@@ -1,10 +1,10 @@
 @echo off
-REM =================================================
-REM ffmpeg (W)indows (C)ontext (T)ools (c) 2022 Orkan
-REM -------------------------------------------------
+REM ======================================================
+REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021-2023 Orkan
+REM ------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM https://github.com/orkan/ffmpeg
-REM =================================================
+REM ======================================================
 
 setlocal
 pushd %~dp0
@@ -53,7 +53,7 @@ set SS_ARG=-ss %SS%
 set TO_ARG=-to %TO%
 if "%SS_ARG%" == "-ss " set SS_ARG=-ss 0
 if "%TO_ARG%" == "-to " set TO_ARG=
-if "%STREAMS%" == "" set STREAMS=-map 0:v -map 0:a:0 -map 0:a:1? -map 0:s:0?
+if "%STREAMS%" == "" set STREAMS=-map 0:v? -map 0:a:0? -map 0:a:1? -map 0:s:0?
 
 REM Strings: -------------------------------------------
 set SS_STR=%SS_ARG::=.%
@@ -106,7 +106,7 @@ if not exist "%WAIT_FILE%" (
 )
 set /A WAIT_LOOP += 1
 set /A WAIT_TOTAL = WAIT_LOOP * WAIT_TIME
-TITLE Waiting %WAIT_TOTAL% sec...
+TITLE %WAIT_TOTAL%s
 call :waitSleep %WAIT_TIME%
 goto :wait
 
