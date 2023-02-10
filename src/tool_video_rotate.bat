@@ -1,40 +1,44 @@
 @echo off
-REM ======================================================
-REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021-2023 Orkan
-REM ------------------------------------------------------
+REM =============================================================
+REM ork-ffmpeg (W)indows (C)ontext (T)ools v2 (c) 2021-2023 Orkan
+REM -------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM https://github.com/orkan/ffmpeg
-REM ======================================================
+REM =============================================================
 
 setlocal
 pushd %~dp0
-call _config.bat reload
+call _config.bat
 call _header.bat "%~nx0"
 
-echo ***************************************
-echo    Tool: Video Rotate
-echo   Usage: %~nx0 ^<infile^>
-echo ***************************************
-
-REM Import: -------------------------------------------
 set "INFILE=%~1"
+set "NOWAIT=%~2"
 
-REM Display: ------------------------------------------
+echo *********************************************************************
+echo    Tool: Video Rotate
+echo   Usage: %~nx0 ^<infile^> [nowait]
+echo *********************************************************************
 echo Inputs:
-echo INFILE: "%INFILE%"
+echo  INFILE: "%INFILE%"
+echo  NOWAIT: "%NOWAIT%"
 echo.
 
-REM Verify: --------------------------------------------
+REM -------------------------------------------------------------
+REM Verify:
 call _inputfile.bat "%INFILE%" silent || goto :end
 
-REM User: ----------------------------------------------
+REM -------------------------------------------------------------
+REM User:
 set /p ROTATION=Rotation: 
 
-REM Command: -------------------------------------------
+REM -------------------------------------------------------------
+REM Command:
 echo.
 call ffmpeg_rotate.bat "%INFILE%" %ROTATION%
+if %ERRORLEVEL% GEQ 1 goto :end
 
-REM Finalize: ------------------------------------------
+REM -------------------------------------------------------------
+REM Finalize:
 :end
-call _status.bat
+call _status.bat "%NOWAIT%"
 exit /b %ERRORLEVEL%

@@ -1,23 +1,24 @@
 @echo off
-REM ======================================================
-REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021-2023 Orkan
-REM ------------------------------------------------------
+REM =============================================================
+REM ork-ffmpeg (W)indows (C)ontext (T)ools v2 (c) 2021-2023 Orkan
+REM -------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM https://github.com/orkan/ffmpeg
-REM ======================================================
+REM =============================================================
 
 setlocal
 pushd %~dp0
-call _config.bat reload
+call _config.bat
 call _header.bat "%~nx0"
 
 echo ******************************************
 echo   Tool: Merge MP4 Videos
-echo   Note: Only ACC sound in MP4 is supported
+echo   Note: Only ACC audio is supported
 echo ******************************************
 echo.
 
-REM Dirs setup: ----------------------------------------
+REM -------------------------------------------------------------
+REM Dirs setup:
 :mp4dir
 set /p MP4DIR=Input videos dir: 
 if not exist "%MP4DIR%" (
@@ -34,16 +35,17 @@ if "%YESNO%" == "n" (
 )
 
 :tmpdir
-set /p TMPDIR=Temp dir [%TOOL_VIDEO_MERGE_TMPDIR%]: 
-if "%TMPDIR%" == "" set TMPDIR=%TOOL_VIDEO_MERGE_TMPDIR%
+set /p TMPDIR=Temp dir [%DEFAULT_TOOL_VIDEO_MERGE_OUTDIR%]: 
+if "%TMPDIR%" == "" set TMPDIR=%DEFAULT_TOOL_VIDEO_MERGE_OUTDIR%
 call _inputfile.bat "%TMPDIR%" silent || goto :tmpdir
 
 :outdir
-set /p OUTDIR=Output dir [%TOOL_VIDEO_MERGE_OUTDIR%]: 
-if "%OUTDIR%" == "" set OUTDIR=%TOOL_VIDEO_MERGE_OUTDIR%
+set /p OUTDIR=Output dir [%DEFAULT_TOOL_VIDEO_MERGE_OUTDIR%]: 
+if "%OUTDIR%" == "" set OUTDIR=%DEFAULT_TOOL_VIDEO_MERGE_OUTDIR%
 call _inputfile.bat "%OUTDIR%" silent || goto :outdir
 
-REM Create intermediate TS files: ----------------------
+REM -------------------------------------------------------------
+REM Create intermediate TS files:
 set COUNT=0
 set TODEL=
 for %%f in (%MP4DIR%\*.mp4) do (
@@ -56,21 +58,26 @@ if "%COUNT%" == "0" (
 	goto :end
 )
 
-REM Concat videos: -------------------------------------
+REM -------------------------------------------------------------
+REM Concat videos:
 call ffmpeg -y -i "concat:%CONCAT%" -c copy -bsf:a aac_adtstoasc "%OUTDIR%\%FIRSTNAME%.[merged].mp4" || goto :end
 
-REM Delete intermediate files: -------------------------
+REM -------------------------------------------------------------
+REM Delete intermediate files:
 echo.
 set /p DELYESNO=Delete temp files? [Y/n]: 
 if "%DELYESNO%" == "n" goto :end
 del %TODEL%
 
-REM Finalize: ------------------------------------------
+REM -------------------------------------------------------------
+REM Finalize:
 :end
 call _status.bat
 exit /b %ERRORLEVEL%
 
-REM Functions: -----------------------------------------
+REM =============================================================
+REM Functions:
+REM -------------------------------------------------------------
 :toIntermediate
 set NAME=%~n1
 set TSNAME=%TMPDIR%\%NAME%.ts

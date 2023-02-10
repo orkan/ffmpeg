@@ -12,15 +12,17 @@ call _config.bat
 call _header.bat "%~nx0"
 
 set "INFILE=%~1"
-set "NOWAIT=%~2"
+set "OUTFILE=%~2"
+set "NOWAIT=%~3"
 
 echo *********************************************************************
-echo    Tool: Video to GIF
-echo   Usage: %~nx0 ^<infile^> [nowait]
+echo    Tool: Any to MP3
+echo   Usage: %~nx0 ^<infile^> [outfile] [nowait]
 echo *********************************************************************
 echo Inputs:
-echo  INFILE: "%INFILE%"
-echo  NOWAIT: "%NOWAIT%"
+echo   INFILE: "%INFILE%"
+echo  OUTFILE: "%OUTFILE%"
+echo   NOWAIT: "%NOWAIT%"
 echo.
 
 REM -------------------------------------------------------------
@@ -29,17 +31,16 @@ call _inputfile.bat "%INFILE%" silent || goto :end
 
 REM -------------------------------------------------------------
 REM User:
-set /p START=Start time [0:0.0]: 
-set /p DURATION=Duration [0:0.0]: 
+set /p BRATE=Bitrate [%DEFAULT_MP3_BRATE%]: 
+set /p SRATE=Sample [%DEFAULT_MP3_SRATE%]: 
 
 REM -------------------------------------------------------------
 REM Command:
-echo.
-call ffmpeg_gif.bat %1 %START% %DURATION%
+call ffmpeg_mp3.bat "%~1" "%BRATE%" "%SRATE%" "%OUTFILE%" || goto :end
 if %ERRORLEVEL% GEQ 1 goto :end
 
 REM -------------------------------------------------------------
 REM Finalize:
 :end
-call _status.bat "%NOWAIT%"
+call _status.bat %NOWAIT%
 exit /b %ERRORLEVEL%

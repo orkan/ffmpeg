@@ -1,25 +1,24 @@
 @echo off
-REM ======================================================
-REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021-2023 Orkan
-REM ------------------------------------------------------
+REM =============================================================
+REM ork-ffmpeg (W)indows (C)ontext (T)ools v2 (c) 2021-2023 Orkan
+REM -------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM https://github.com/orkan/ffmpeg
-REM ======================================================
+REM =============================================================
 
 setlocal
 
-REM Import: -------------------------------------------
 set "INFILE=%~1"
 
-REM ---------------------------------------------------------
+REM -------------------------------------------------------------
 REM Command:
-set COMMAND=%~dp0..\..\bin\Recycle.exe "%INFILE%"
+set COMMAND=%BIN_RECYCLE% "%INFILE%"
+if "%APP_DEBUG%" NEQ "" echo [RECYCLE: %COMMAND%]
 
 echo.
-echo %COMMAND%
+%COMMAND%
 
-if "%FFMPEG_DEBUG%" == "" (
-	%COMMAND%
-)
-
+REM -------------------------------------------------------------
+REM Finalize:
+:end
 exit /b %ERRORLEVEL%

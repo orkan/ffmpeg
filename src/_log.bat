@@ -1,14 +1,21 @@
 @echo off
-REM ======================================================
-REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021-2023 Orkan
-REM ------------------------------------------------------
+REM =============================================================
+REM ork-ffmpeg (W)indows (C)ontext (T)ools v2 (c) 2021-2023 Orkan
+REM -------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM https://github.com/orkan/ffmpeg
-REM ======================================================
+REM =============================================================
 
-call %~dp0_config.bat
-call %~dp0_header.bat "%~nx0"
+setlocal
+pushd %~dp0
+call _config.bat
+call _header.bat "%~nx0"
 
-if "%FFMPEG_DEBUG%" == "" if "%LOG_FILE%" NEQ "" (
-	echo [%DATE% %TIME%] %* >> "%LOG_FILE%"
+set RECORD=[%DATE% %TIME%] %*
+
+if "%APP_DEBUG%" NEQ "" (
+	echo [LOG: %RECORD%]
+	exit /b
 )
+
+if exist "%LOG_FILE%" echo %RECORD% >> "%LOG_FILE%"

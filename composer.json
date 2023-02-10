@@ -1,6 +1,6 @@
 {
 	"name": "orkan/ffmpeg",
-	"description": "ffmpeg (W)indows (C)ontext (T)ools",
+	"description": "ork-ffmpeg (W)indows (C)ontext (T)ools",
 	"homepage": "https://github.com/orkan/ffmpeg",
 	"keywords": [
 		"media",
@@ -26,8 +26,8 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "1.3.x-dev",
-			"dev-develop": "1.x-dev"
+			"dev-master": "2.0.x-dev",
+			"dev-develop": "2.x-dev"
 		}
 	}
 }

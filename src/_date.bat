@@ -1,10 +1,10 @@
 @echo off
-REM ======================================================
-REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021-2023 Orkan
-REM ------------------------------------------------------
+REM =============================================================
+REM ork-ffmpeg (W)indows (C)ontext (T)ools v2 (c) 2021-2023 Orkan
+REM -------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM https://github.com/orkan/ffmpeg
-REM ======================================================
+REM =============================================================
 
 REM Show all
 REM ffprobe -show_format video-xyz.mov

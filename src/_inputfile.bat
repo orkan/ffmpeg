@@ -1,34 +1,34 @@
 @echo off
-REM ======================================================
-REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021-2023 Orkan
-REM ------------------------------------------------------
+REM =============================================================
+REM ork-ffmpeg (W)indows (C)ontext (T)ools v2 (c) 2021-2023 Orkan
+REM -------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM https://github.com/orkan/ffmpeg
-REM ======================================================
+REM =============================================================
 
-REM Import: -------------------------------------------
-REM Use double quotes to allow special chars in filename like: &()
 setlocal
-set "INPUT=%~1"
-set "EXTRA=%2"
+set "INFILE=%~1"
+set "SILENT=%~2"
 
-REM Verify: --------------------------------------------
-if "%INPUT%" == "" (
-	echo Error: Empty arg 1
-	pause
+REM -------------------------------------------------------------
+REM Verify:
+if "%INFILE%" == "" (
+	echo Error: Empty INFILE
 	exit /b 400
 )
-if not exist "%INPUT%" (
+if not exist "%INFILE%" (
 	REM https://stackoverflow.com/questions/11944074/parenthesis-in-variables-inside-if-blocks
-	REM for %%^" in ("") do echo Error: File not found: %%~"[%INPUT%]%%~"
+	REM for %%^" in ("") do echo Error: File not found: %%~"[%INFILE%]%%~"
 	REM Parentheses in filename! Will use double-quotes for now...
-	echo Error: File not found "%INPUT%"
-	pause
+	echo Error: File not found "%INFILE%"
 	exit /b 404
 )
 
+REM -------------------------------------------------------------
+REM Finalize:
 :end
-if "%EXTRA%" NEQ "silent" (
-	echo File: "%INPUT%"
+if "%SILENT%" == "" (
+	echo Exists: "%INFILE%"
 )
+
 exit /b %ERRORLEVEL%

@@ -1,15 +1,19 @@
 @echo off
-REM ======================================================
-REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021-2023 Orkan
-REM ------------------------------------------------------
+REM =============================================================
+REM ork-ffmpeg (W)indows (C)ontext (T)ools v2 (c) 2021-2023 Orkan
+REM -------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM https://github.com/orkan/ffmpeg
-REM ======================================================
+REM =============================================================
 
 setlocal
 pushd %~dp0
 call _config.bat
 call _header.bat "%~nx0"
+
+set "INFILE=%~1"
+set "ROTATION=%~2"
+set "OUTFILE=%~3"
 
 echo ********************************************************
 echo   Video rotation
@@ -18,21 +22,16 @@ echo   Notes:
 echo   - only changes [rotate] flag in metadata video
 echo   - make sure your video player can read this flag
 echo ********************************************************
-
-REM Import: -------------------------------------------
-set "INFILE=%~1"
-set "ROTATION=%~2"
-set "OUTFILE=%~3"
-
-REM Display: -------------------------------------------
 echo Inputs:
-echo   INFILE: "%INFILE%"
-echo ROTATION: "%ROTATION%"
-echo  OUTFILE: "%OUTFILE%"
+echo    INFILE: "%INFILE%"
+echo  ROTATION: "%ROTATION%"
+echo   OUTFILE: "%OUTFILE%"
 echo.
 
-REM Verify: --------------------------------------------
+REM -------------------------------------------------------------
+REM Verify:
 call _inputfile.bat "%INFILE%" silent || goto :end
+
 if "%ROTATION%" == "" (
 	echo Error: Empty ^<rotation^>
 	set ERRORLEVEL=400
@@ -51,11 +50,12 @@ if "%OUTFILE%" == "" (
 
 set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%ROTATE%] %META_USER_COMMENT%"
 
-REM Run: -----------------------------------------------
-:run
+REM -------------------------------------------------------------
+REM Command:
 call _log.bat %~nx0 %*
 call ffmpeg -y -i "%INFILE%" -c copy %METAS% %ROTATE% "%OUTFILE%"
 
-REM Finalize: ------------------------------------------
+REM -------------------------------------------------------------
+REM Finalize:
 :end
 exit /b %ERRORLEVEL%

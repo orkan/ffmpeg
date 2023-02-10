@@ -1,20 +1,19 @@
 @echo off
-REM ======================================================
-REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021-2023 Orkan
-REM ------------------------------------------------------
+REM =============================================================
+REM ork-ffmpeg (W)indows (C)ontext (T)ools v2 (c) 2021-2023 Orkan
+REM -------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM https://github.com/orkan/ffmpeg
-REM ======================================================
+REM =============================================================
 
-call %~dp0_config.bat
-
+REM -------------------------------------------------------------
 REM Display [header] only in DEBUG mode
-if "%FFMPEG_DEBUG%" == "" exit /b
+if "%APP_DEBUG%" == "" exit /b
 
 setlocal
-if "%FFMPEG_DEBUG%" NEQ "" set INFO_DEBUG=Debug mode: ON
-if "%FFMPEG_ERROR%" NEQ "" set INFO_DEBUG=%INFO_DEBUG%, ERRORLEVEL: %FFMPEG_ERROR%
-if "%INFO_DEBUG%"   NEQ "" set INFO_DEBUG=(%INFO_DEBUG%)
+if "%APP_DEBUG%" NEQ "" set INFO=Debug mode: ON
+if "%APP_ERROR%" NEQ "" set INFO=%INFO%, ERRORLEVEL: %APP_ERROR%
+if "%INFO%" NEQ "" set INFO=(%INFO%)
 
 echo.
-echo [%~1] %INFO_DEBUG%
+echo [%~1] %INFO%

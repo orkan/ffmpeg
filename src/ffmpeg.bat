@@ -1,44 +1,50 @@
 @echo off
-REM ======================================================
-REM ffmpeg (W)indows (C)ontext (T)ools (c) 2021-2023 Orkan
-REM ------------------------------------------------------
+REM =============================================================
+REM ork-ffmpeg (W)indows (C)ontext (T)ools v2 (c) 2021-2023 Orkan
+REM -------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM https://github.com/orkan/ffmpeg
-REM ======================================================
+REM =============================================================
 
+setlocal
 call %~dp0_config.bat
 call %~dp0_header.bat "%~nx0"
 
-setlocal
 set FFMPEG_EXE=%~n0.exe
 
 if not exist "%FFMPEG_HOME%" (
 	set FFMPEG_HOME=%FFMPEG_HOME_DEF%
 )
 
-set EXE_LOC=%FFMPEG_HOME%\%FFMPEG_EXE%
+set FFMPEG_EXE_LOC=%FFMPEG_HOME%\%FFMPEG_EXE%
 
-if not exist "%EXE_LOC%" (
-	echo Error: Can't find %FFMPEG_EXE% in [%FFMPEG_HOME%]
+if not exist "%FFMPEG_EXE_LOC%" (
+	echo [FFMPEG] Error: Can't find "%FFMPEG_EXE%" in "%FFMPEG_HOME%"
 	exit /b 404
 )
 
 REM Get fully qualified path name
 REM https://stackoverflow.com/questions/1645843/resolve-absolute-path-from-relative-path-and-or-file-name
 pushd %FFMPEG_HOME%
-set APP=%CD%\%FFMPEG_EXE%
+set FFMPEG_EXE_ABS=%CD%\%FFMPEG_EXE%
 popd
 
+set COMMAND=%FFMPEG_EXE_ABS% %*
+
 echo.
-set COMMAND=%APP% %*
 echo %COMMAND%
 
-if "%FFMPEG_ERROR%" NEQ "" (
-	echo FFMPEG exit with: [%FFMPEG_ERROR%]
-	exit /b %FFMPEG_ERROR%
+if "%APP_ERROR%" NEQ "" (
+	echo [FFMPEG] Exit code: "%APP_ERROR%"]
+	exit /b %APP_ERROR%
 )
 
-if "%FFMPEG_DEBUG%" == "" (
+if "%APP_DEBUG%" == "" (
 	echo.
-	%COMMAND%
+	%COMMAND% || goto :end
 )
+
+REM -------------------------------------------------------------
+REM Finalize:
+:end
+exit /b %ERRORLEVEL%
