@@ -29,20 +29,18 @@ echo.
 
 REM Verify: --------------------------------------------
 if "%OUTFILE%" == "" (
-	echo Error: Empty ^<outfile^>
-	set ERRORLEVEL=400
-	goto :end
+	echo [ERROR] Empty OUTFILE!
+	exit /b 400
 )
 if "%DURATION%" == "" (
-	echo Error: Empty ^<duration^>
-	set ERRORLEVEL=400
-	goto :end
+	echo [ERROR] Empty DURATION!
+	exit /b 400
 )
 
 REM -------------------------------------------------------------
 REM Config:
 if "%CHANNELS%" == "" set CHANNELS=2
-if "%RATE%" == "" set RATE=41000
+if "%RATE%"     == "" set RATE=41000
 
 REM -------------------------------------------------------------
 REM Command:

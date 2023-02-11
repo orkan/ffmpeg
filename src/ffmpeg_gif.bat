@@ -51,7 +51,7 @@ if "%OUTFILE%" == "" (
 	set "PATH1=%~dpn4"
 )
 set OUTFILE=%PATH1%.[%SS_STR%][%TO_STR%].gif
-set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%SS%] [%TO%] [-filter_complex ...] %META_USER_COMMENT%"
+set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%SS%] [%TO%] [-filter_complex ...]"
 
 REM -------------------------------------------------------------
 REM Command:

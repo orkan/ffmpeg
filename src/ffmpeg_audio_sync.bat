@@ -31,10 +31,10 @@ echo.
 REM -------------------------------------------------------------
 REM Verify:
 call _inputfile.bat "%INFILE%" silent || goto :end
+
 if "%SECONDS%" == "" (
-	echo Error: Empty ^<delay^>
-	set ERRORLEVEL=400
-	goto :end
+	echo [ERROR] Empty SECONDS!
+	exit /b 400
 )
 
 REM -------------------------------------------------------------
@@ -56,7 +56,7 @@ if "%OUTFILE%" == "" (
 	set "OUTFILE=%~dpn1.[audio%SECONDS%sec]%~x1"
 )
 
-set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%OFFSET% %MAP%] %META_USER_COMMENT%"
+set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%OFFSET%] [%MAP%]"
 
 REM -------------------------------------------------------------
 REM Command:

@@ -7,7 +7,7 @@ REM https://github.com/orkan/ffmpeg
 REM =============================================================
 
 REM Let _status.bat return immediately after each tool_*.bat
-set STATUS_NOWAIT=convert
+set APP_NOWAIT=convert
 
 REM Set before setlocal! See :end
 set "NOWAIT=%~2"
@@ -84,7 +84,7 @@ if "%SHUTDOWN_TYPE%" NEQ "n" (
 
 :end
 endlocal
-set STATUS_NOWAIT=
+set APP_NOWAIT=
 call _status.bat "%NOWAIT%"
 exit /b %ERRORLEVEL%
 

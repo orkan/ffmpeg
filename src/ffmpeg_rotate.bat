@@ -33,9 +33,8 @@ REM Verify:
 call _inputfile.bat "%INFILE%" silent || goto :end
 
 if "%ROTATION%" == "" (
-	echo Error: Empty ^<rotation^>
-	set ERRORLEVEL=400
-	goto :end
+	echo [ERROR] Empty ROTATION!
+	exit /b 400
 )
 
 REM [stackoverflow] Rotate mp4 videos without re-encoding
@@ -48,12 +47,13 @@ if "%OUTFILE%" == "" (
 	set "OUTFILE=%~dpn1.[r%ROTATION%]%~x1"
 )
 
-set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%ROTATE%] %META_USER_COMMENT%"
+set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%ROTATE%]"
 
 REM -------------------------------------------------------------
 REM Command:
 call _log.bat %~nx0 %*
 call ffmpeg -y -i "%INFILE%" -c copy %METAS% %ROTATE% "%OUTFILE%"
+if %ERRORLEVEL% GEQ 1 goto :end
 
 REM -------------------------------------------------------------
 REM Finalize:

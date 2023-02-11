@@ -46,7 +46,7 @@ set BRATE_STR=%BRATE::=%
 
 call :setOUTFILE "%INFILE%" "%OUTFILE%"
 
-set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%BRATE%] [%SRATE%] %META_USER_COMMENT%"
+set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%BRATE%] [%SRATE%]"
 
 REM -------------------------------------------------------------
 REM Command:

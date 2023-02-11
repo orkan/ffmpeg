@@ -22,15 +22,17 @@ REM Dirs setup:
 :mp4dir
 set /p MP4DIR=Input videos dir: 
 if not exist "%MP4DIR%" (
-	echo Not exist: [%MP4DIR%]
+	echo [ERROR] Not Not found: "%MP4DIR%"
 	goto :mp4dir
 )
+
 echo Files:
 for %%f in (%MP4DIR%\*.mp4) do echo %%f
+
 echo.
-set /p YESNO=Proceed? [Y/n]: 
-if "%YESNO%" == "n" (
-	set ERRORLEVEL=406
+set /p YESNO=Proceed? [y/N]: 
+if "%YESNO%" NEQ "y" (
+	set APP_ERRORLEVEL=406
 	goto :end
 )
 
@@ -49,18 +51,19 @@ REM Create intermediate TS files:
 set COUNT=0
 set TODEL=
 for %%f in (%MP4DIR%\*.mp4) do (
-	call :toIntermediate "%%f" || exit /b
+	call :toIntermediate "%%f" || goto :end
 	set /a COUNT+=1
 )
 if "%COUNT%" == "0" (
-	echo No files in "%MP4DIR%"
-	set ERRORLEVEL=404
+	echo [ERROR] No files in "%MP4DIR%"
+	set APP_ERRORLEVEL=404
 	goto :end
 )
 
 REM -------------------------------------------------------------
 REM Concat videos:
 call ffmpeg -y -i "concat:%CONCAT%" -c copy -bsf:a aac_adtstoasc "%OUTDIR%\%FIRSTNAME%.[merged].mp4" || goto :end
+if %ERRORLEVEL% GEQ 1 goto :end
 
 REM -------------------------------------------------------------
 REM Delete intermediate files:
@@ -72,7 +75,7 @@ del %TODEL%
 REM -------------------------------------------------------------
 REM Finalize:
 :end
-call _status.bat
+call _status.bat "" %APP_ERRORLEVEL%
 exit /b %ERRORLEVEL%
 
 REM =============================================================

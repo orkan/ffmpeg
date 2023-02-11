@@ -95,8 +95,8 @@ if "%RECALL%" == "" (
 REM -------------------------------------------------------------
 REM META tags:
 for /f "tokens=*" %%x in ( 'call _location.bat "%INFILE%"' ) do set LOCATION=%%x
-if "%LOCATION%" NEQ "" set META_LOCATION=gps:[%LOCATION%]
-set METAS=%META_GLOBAL% -metadata description="%META_LOCATION%" -metadata comment="%~nx0 [%SS_ARG%] [%TO_ARG%] %META_USER_COMMENT%"
+if "%LOCATION%" NEQ "" set META_LOCATION=-metadata description="gps:[%LOCATION%]"
+set METAS=%META_GLOBAL% %META_LOCATION% -metadata comment="%~nx0 [%SS_ARG%] [%TO_ARG%]"
 
 REM -------------------------------------------------------------
 REM Wait:

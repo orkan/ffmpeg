@@ -1,11 +1,13 @@
 ![ffmpeg-logo](https://user-images.githubusercontent.com/129182/109426413-f506b680-79ed-11eb-9792-c09119ed708a.jpg)
 
-# ork-ffmpeg (W)indows (C)ontext (T)ools `v2.0.1`
+# ork-ffmpeg `v2.1.0`
 Convert your media files quickly with FFmpeg library.
 
 ---
 
 The main idea is to limit the command line switches passed to FFmpeg.exe while keeping full control of the conversion process.
+Use Windows context menu (Send To) or drag&drop features to quickly convert your media.
+Use convert.bat tool to batch proccess multiple media files from different locations at once.
 
 ## Installation
 
@@ -53,7 +55,7 @@ echo ffmpeg_mp3.bat "D:\clips\*.avi"
 [Orkan](https://github.com/orkan)
 
 ### Updated
-Sat, 11 Feb 2023 04:40:57 +01:00
+Sat, 11 Feb 2023 16:19:24 +01:00
 
 ### License
 MIT

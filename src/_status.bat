@@ -10,16 +10,23 @@ REM Tip: Status codes https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/4
 
 REM Cant use setlocal cos it resets ERRORLEVEL !!!
 REM setlocal
-REM set "NOWAIT=%~1"
 
-echo.
-if %ERRORLEVEL% == 0 (
+set STATUS_NOWAIT=%~1
+if "%STATUS_NOWAIT%" == "" set STATUS_NOWAIT=%APP_NOWAIT%
+
+set STATUS_ERRORLEVEL=%~2
+if "%STATUS_ERRORLEVEL%" == "" set STATUS_ERRORLEVEL=%ERRORLEVEL%
+
+if %STATUS_ERRORLEVEL% == 0 (
+	echo.
 	echo BUILD SUCCESSFUL
-	if "%~1" NEQ "" goto :eof
+	echo.
 	if "%STATUS_NOWAIT%" NEQ "" goto :eof
 ) else (
-	echo BUILD FAILED ^(%ERRORLEVEL%^)
+	echo.
+	echo BUILD FAILED ^(%STATUS_ERRORLEVEL%^)
+	echo.
 	REM Always pause on errors!
 )
-echo.
+
 pause

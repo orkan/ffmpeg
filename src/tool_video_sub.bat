@@ -28,17 +28,18 @@ echo.
 REM -------------------------------------------------------------
 REM Verify:
 call _inputfile.bat "%INFILE%" silent || goto :end
+
 if "%SUBTITLES%" == "" set SUBTITLES=%~dpn1.srt
 if not exist "%SUBTITLES%" (
-	echo File not found: "%SUBTITLES%"
-	set ERRORLEVEL=404
+	echo [ERROR] Not found SUBTITLES: "%SUBTITLES%"
+	set APP_ERRORLEVEL=404
 	goto :end
 )
 
 REM -------------------------------------------------------------
 REM Config:
 set OUTFILE=%~dpn1.[sub]%~x1
-set METAS=%META_GLOBAL% -metadata comment="%~nx0 : '%~nx1' -c:s mov_text %META_USER_COMMENT%"
+set METAS=%META_GLOBAL% -metadata comment="%~nx0 : '%~nx1' -c:s mov_text"
 
 REM -------------------------------------------------------------
 REM Command:
@@ -49,5 +50,5 @@ if %ERRORLEVEL% GEQ 1 goto :end
 REM -------------------------------------------------------------
 REM Finalize:
 :end
-call _status.bat "%NOWAIT%"
+call _status.bat "%NOWAIT%" %APP_ERRORLEVEL%
 exit /b %ERRORLEVEL%
