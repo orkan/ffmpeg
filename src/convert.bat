@@ -21,13 +21,13 @@ set "FILES=%~1"
 REM set "NOWAIT=%~2" // ^^ above ^^
 
 echo ******************************************************************
-echo  Batch media converter
+echo  Batch media converter v%APP_VERSION%
 echo  Usage: %~nx0 ^<files^> [nowait]
-echo  -----------------------------------------------------------------
-echo  ^<files^>
-echo  	- filename if on APP_TOOLS_PATH
-echo  	- relative path to this script location
-echo  	- absolute path if none above
+REM echo  -----------------------------------------------------------------
+REM echo  ^<files^>
+REM echo  	- filename if on APP_TOOLS_PATH
+REM echo  	- relative path to this script location
+REM echo  	- absolute path if none above
 echo ******************************************************************
 echo Inputs:
 echo   FILES: "%FILES%"

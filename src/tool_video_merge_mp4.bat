@@ -12,7 +12,7 @@ call _config.bat
 call _header.bat "%~nx0"
 
 echo ******************************************
-echo   Tool: Merge MP4 Videos
+echo   Tool: Merge MP4 Videos v%APP_VERSION%
 echo   Note: Only ACC audio is supported
 echo ******************************************
 echo.

@@ -17,6 +17,7 @@ REM set APP_ERROR=1
 REM -------------------------------------------------------------
 REM Setup:
 set APP_NAME=ork-ffmpeg
+set APP_VERSION=2.0.1
 
 REM From [vendor] dir!
 pushd %~dp0..\..\..\..
@@ -59,7 +60,7 @@ REM To copy all metadata: -map_metadata 0
 REM Define your META_USER_??? in usrer config.bat since some tools can modify particular metadata, then your META will be appended
 set "META_USER_COPYRIGHT=Orkan <orkans+ffmpeg@gmail.com>"
 set "META_USER_COMMENT=https://github.com/orkan/ffmpeg"
-set "META_USER_DESCRIPTION=%APP_NAME% v2.0.0"
+set "META_USER_DESCRIPTION=%APP_NAME% v2.0.1"
 set META_GLOBAL=-map_metadata 0 -metadata copyright="%META_USER_COPYRIGHT%" -metadata comment="%META_USER_COMMENT%" -metadata description="%META_USER_DESCRIPTION%"
 
 REM -------------------------------------------------------------

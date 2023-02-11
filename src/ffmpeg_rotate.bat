@@ -16,7 +16,7 @@ set "ROTATION=%~2"
 set "OUTFILE=%~3"
 
 echo ********************************************************
-echo   Video rotation
+echo   Video rotate v%APP_VERSION%
 echo   Usage: %~nx0 ^<infile^> ^<rotation^> [outfile]
 echo   Notes:
 echo   - only changes [rotate] flag in metadata video

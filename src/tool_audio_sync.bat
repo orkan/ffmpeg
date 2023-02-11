@@ -15,7 +15,7 @@ set "INFILE=%~1"
 set "NOWAIT=%~2"
 
 echo *********************************************************************
-echo    Tool: Audio delay
+echo    Tool: Audio delay v%APP_VERSION%
 echo   Usage: %~nx0 ^<infile^> [nowait]
 echo *********************************************************************
 echo Inputs:

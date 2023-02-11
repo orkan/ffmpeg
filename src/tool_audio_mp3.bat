@@ -16,7 +16,7 @@ set "OUTFILE=%~2"
 set "NOWAIT=%~3"
 
 echo *********************************************************************
-echo    Tool: Any to MP3
+echo    Tool: Any to MP3 v%APP_VERSION%
 echo   Usage: %~nx0 ^<infile^> [outfile] [nowait]
 echo *********************************************************************
 echo Inputs:

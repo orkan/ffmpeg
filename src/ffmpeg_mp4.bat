@@ -17,7 +17,7 @@ set "EXT=%~3"
 set "OUTFILE=%~4"
 
 echo *****************************************************************************************
-echo   Video to MP4
+echo   Video to MP4 v%APP_VERSION%
 echo   Usage: %~nx0 ^<infile^> [quality 0(hi)-51(low): %DEFAULT_H264_CRF%] [extra: %DEFAULT_H264_EXT%] [outfile]
 echo *****************************************************************************************
 echo Inputs:

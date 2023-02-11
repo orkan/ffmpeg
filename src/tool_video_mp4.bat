@@ -15,7 +15,7 @@ set "INFILE=%~1"
 set "NOWAIT=%~2"
 
 echo *********************************************************************
-echo    Tool: Video to MP4
+echo    Tool: Video to MP4 v%APP_VERSION%
 echo   Usage: %~nx0 ^<infile^> [nowait]
 echo *********************************************************************
 echo Inputs:

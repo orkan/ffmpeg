@@ -17,7 +17,7 @@ set "NOWAIT=%~3"
 set "STREAMS=%~4"
 
 echo *********************************************************************
-echo    Tool: Video cut by timestamps
+echo    Tool: Video cut by timestamps v%APP_VERSION%
 echo   Usage: %~nx0 ^<infile^> [outfile] [nowait] [streams]
 echo *********************************************************************
 echo Inputs:

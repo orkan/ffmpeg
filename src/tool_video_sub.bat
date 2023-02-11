@@ -16,7 +16,7 @@ set "SUBTITLES=%~2"
 set "NOWAIT=%~3"
 
 echo *********************************************************************
-echo    Tool: Video subtitles
+echo    Tool: Video subtitles v%APP_VERSION%
 echo   Usage: %~nx0 ^<infile^> [subtitles: infile.srt] [nowait]
 echo *********************************************************************
 echo Inputs:

@@ -17,7 +17,7 @@ set FPS=%~3
 set EXT=%~4
 
 echo ***********************************************************************************************
-echo   FFplay: Video to MP4 (WIP)
+echo   FFplay: Video to MP4 (WIP) v%APP_VERSION%
 echo    Usage: %~nx0 ^<infile^> [quality 0(hi)-51(low): %DEFAULT_H264_CRF%] [fps: original] [extra: %DEFAULT_H264_EXT%]
 echo ***********************************************************************************************
 echo Inputs:

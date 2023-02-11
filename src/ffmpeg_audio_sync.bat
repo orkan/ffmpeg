@@ -16,7 +16,7 @@ set "SECONDS=%~2"
 set "OUTFILE=%~3"
 
 echo ********************************************************
-echo   Audio delay
+echo   Audio delay v%APP_VERSION%
 echo   Usage: %~nx0 ^<infile^> ^<seconds^> [outfile]
 echo   Notes:
 echo   - use negative value to delay audio

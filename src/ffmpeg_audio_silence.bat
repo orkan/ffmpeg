@@ -17,7 +17,7 @@ set "CHANNELS=%~3"
 set "RATE=%~4"
 
 echo ************************************************************************
-echo   Generate audio silence
+echo   Generate audio silence v%APP_VERSION%
 echo   Usage: %~nx0 ^<outfile^> ^<duration^> [channels] [rate]
 echo ************************************************************************
 echo Inputs:
