@@ -28,8 +28,8 @@ REM Add current script location to help resolving relative paths
 REM Return %~f1 if found, empty otherwise:
 set AUTOLOAD_TOOL_ABS=%~f$APP_TOOLS_PATH:1
 if not exist "%AUTOLOAD_TOOL_ABS%" (
-	echo [AUTOLOAD] Unable to locate TOOL: "%~1"
-	echo [AUTOLOAD] Was using: "%APP_TOOLS_PATH%"
+	echo [%~n0] Unable to locate TOOL "%~1"
+	echo [%~n0] Was using "%APP_TOOLS_PATH%"
 	exit /b 404
 )
 

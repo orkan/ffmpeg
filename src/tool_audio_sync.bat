@@ -14,10 +14,10 @@ call _header.bat "%~nx0"
 set "INFILE=%~1"
 set "NOWAIT=%~2"
 
-echo *********************************************************************
+echo **********************************************************************************************
 echo    Tool: Audio delay v%APP_VERSION%
 echo   Usage: %~nx0 ^<infile^> [nowait]
-echo *********************************************************************
+echo **********************************************************************************************
 echo Inputs:
 echo  INFILE: "%INFILE%"
 echo  NOWAIT: "%NOWAIT%"
@@ -34,7 +34,7 @@ set /p SECONDS=Audio delay (sec):
 REM -------------------------------------------------------------
 REM Command:
 echo.
-call ffmpeg_audio_sync.bat "%INFILE%" %SECONDS%
+call ffmpeg_audio_sync.bat "%INFILE%" "%SECONDS%"
 if %ERRORLEVEL% GEQ 1 goto :end
 
 REM -------------------------------------------------------------

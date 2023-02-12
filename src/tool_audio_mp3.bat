@@ -15,10 +15,10 @@ set "INFILE=%~1"
 set "OUTFILE=%~2"
 set "NOWAIT=%~3"
 
-echo *********************************************************************
+echo **********************************************************************************************
 echo    Tool: Any to MP3 v%APP_VERSION%
 echo   Usage: %~nx0 ^<infile^> [outfile] [nowait]
-echo *********************************************************************
+echo **********************************************************************************************
 echo Inputs:
 echo   INFILE: "%INFILE%"
 echo  OUTFILE: "%OUTFILE%"
@@ -42,5 +42,5 @@ if %ERRORLEVEL% GEQ 1 goto :end
 REM -------------------------------------------------------------
 REM Finalize:
 :end
-call _status.bat %NOWAIT%
+call _status.bat "%NOWAIT%"
 exit /b %ERRORLEVEL%

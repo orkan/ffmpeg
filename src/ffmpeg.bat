@@ -19,7 +19,7 @@ if not exist "%FFMPEG_HOME%" (
 set FFMPEG_EXE_LOC=%FFMPEG_HOME%\%FFMPEG_EXE%
 
 if not exist "%FFMPEG_EXE_LOC%" (
-	echo [FFMPEG] Error: Can't find "%FFMPEG_EXE%" in "%FFMPEG_HOME%"
+	echo [%~n0] Unable to find "%FFMPEG_EXE%" in "%FFMPEG_HOME%"
 	exit /b 404
 )
 
@@ -35,7 +35,7 @@ echo.
 echo %COMMAND%
 
 if "%APP_ERROR%" NEQ "" (
-	echo [FFMPEG] Exit code: "%APP_ERROR%"]
+	echo [%~n0] Exit code: "%APP_ERROR%"]
 	exit /b %APP_ERROR%
 )
 

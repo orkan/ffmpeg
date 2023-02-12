@@ -15,13 +15,13 @@ set "INFILE=%~1"
 set "SECONDS=%~2"
 set "OUTFILE=%~3"
 
-echo ********************************************************
+echo **********************************************************************************************
 echo   Audio delay v%APP_VERSION%
 echo   Usage: %~nx0 ^<infile^> ^<seconds^> [outfile]
 echo   Notes:
 echo   - use negative value to delay audio
 echo   - use positive value to delay video
-echo ********************************************************
+echo **********************************************************************************************
 echo Inputs:
 echo   INFILE: "%INFILE%"
 echo  SECONDS: "%SECONDS%"
@@ -33,7 +33,7 @@ REM Verify:
 call _inputfile.bat "%INFILE%" silent || goto :end
 
 if "%SECONDS%" == "" (
-	echo [ERROR] Empty SECONDS!
+	echo [%~n0] Empty SECONDS!
 	exit /b 400
 )
 

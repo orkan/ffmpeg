@@ -16,11 +16,11 @@ set "SS=%~2"
 set "TO=%~3"
 set "OUTFILE=%~4"
 
-echo **************************************************************
+echo **********************************************************************************************
 echo   Video to GIF + cut by start/end timestamps v%APP_VERSION%
 echo     Usage: %~nx0 ^<infile^> [start] [end] [outfile]
 echo   Example: %~nx0 "video.mp4" 0:1.0 0:12.5 "video.gif"
-echo **************************************************************
+echo **********************************************************************************************
 echo Inputs:
 echo   INFILE: "%INFILE%"
 echo       SS: "%SS%"

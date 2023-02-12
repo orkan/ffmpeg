@@ -20,15 +20,15 @@ call _header.bat "%~nx0"
 set "FILES=%~1"
 REM set "NOWAIT=%~2" // ^^ above ^^
 
-echo ******************************************************************
+echo **********************************************************************************************
 echo  Batch media converter v%APP_VERSION%
 echo  Usage: %~nx0 ^<files^> [nowait]
-REM echo  -----------------------------------------------------------------
+REM echo  ---------------------------------------------------------------------------------------------
 REM echo  ^<files^>
 REM echo  	- filename if on APP_TOOLS_PATH
 REM echo  	- relative path to this script location
 REM echo  	- absolute path if none above
-echo ******************************************************************
+echo **********************************************************************************************
 echo Inputs:
 echo   FILES: "%FILES%"
 echo  NOWAIT: "%NOWAIT%"
@@ -36,7 +36,6 @@ echo.
 
 REM -------------------------------------------------------------
 REM Setup:
-set TITLE=[CONVERT]
 set DATESTART=%DATE% %TIME%
 set TOTAL=0
 
@@ -74,11 +73,11 @@ if "%SHUTDOWN_USER%" == "s" set SHUTDOWN_TYPE=/s
 if "%SHUTDOWN_USER%" == "h" set SHUTDOWN_TYPE=/h
 if "%SHUTDOWN_TYPE%" NEQ "n" (
 	echo.
-	echo Shutting down...
-	if "%APP_DEBUG%" == "" (
-		shutdown %SHUTDOWN_TYPE%
+	echo [%~n0] Shutting down...
+	if "%APP_DEBUG%" NEQ "" (
+		echo [%~n0] shutdown %SHUTDOWN_TYPE%
 	) else (
-		echo shutdown %SHUTDOWN_TYPE%
+		shutdown %SHUTDOWN_TYPE%
 	)
 )
 
@@ -98,7 +97,7 @@ for /f "tokens=*" %%a in ( 'call %1' ) do (
 	call :start %2 %%a || exit /b %ERRORLEVEL%
 )
 if %PROGRESS% == 0 (
-	echo Error: No files!
+	echo No results
 	exit /b 204
 )
 exit /b 0
@@ -107,11 +106,11 @@ REM -------------------------------------------------------------
 :filesAbs
 set CONVERT_FILES_ABS=%~f$APP_TOOLS_PATH:1
 if not exist "%CONVERT_FILES_ABS%" (
-	echo Unable to locate FILES: "%FILES%"
-	echo Was using: "%APP_TOOLS_PATH%"
+	echo [%~n0] Unable to locate FILES "%FILES%"
+	echo [%~n0] Was using "%APP_TOOLS_PATH%"
 	exit /b 404
 )
-if "%APP_DEBUG%" NEQ "" echo [CONVERT: Located FILES "%~1" at "%CONVERT_FILES_ABS%"]
+if "%APP_DEBUG%" NEQ "" echo [%~n0] Located FILES "%~1" at "%CONVERT_FILES_ABS%"
 exit /b 0
 
 REM -------------------------------------------------------------
@@ -130,7 +129,7 @@ for %%f in (%3) do (
 		call :showTitle "%%~f"
 		echo.
 		REM Locate current tool on APP_TOOLS_PATH
-		if "%APP_DEBUG%" NEQ "" echo [CONVERT: call "%~f$APP_TOOLS_PATH:2" "%%~f" %4 %5 %6]
+		if "%APP_DEBUG%" NEQ "" echo [%~n0] call "%~f$APP_TOOLS_PATH:2" "%%~f" %4 %5 %6
 		call "%~f$APP_TOOLS_PATH:2" "%%~f" %4 %5 %6 || exit /b %ERRORLEVEL%
 	)
 )
@@ -143,11 +142,11 @@ goto :eof
 
 REM -------------------------------------------------------------
 :showTitle
-TITLE [%PROGRESS%/%TOTAL%] %~nx1 - %1
+TITLE [%PROGRESS%/%TOTAL%] %~nx1 - "%~1"
 goto :eof
 
 REM -------------------------------------------------------------
 :showTitleDefault
-TITLE [CONVERT] %~nx1 - %1
+TITLE [CONVERT] %~nx1 - "%~1"
 goto :eof
 

@@ -19,7 +19,7 @@ if not exist "%FFMPEG_HOME%" (
 set FFPLAY_EXE_LOC=%FFMPEG_HOME%\%FFPLAY_EXE%
 
 if not exist "%FFPLAY_EXE_LOC%" (
-	echo [FFMPEG] Error: Can't find "%FFPLAY_EXE%" in "%FFMPEG_HOME%"
+	echo [%~n0] Unable to find "%FFPLAY_EXE%" in "%FFMPEG_HOME%"
 	exit /b 404
 )
 
@@ -29,8 +29,9 @@ pushd %FFMPEG_HOME%
 set FFPLAY_EXE_ABS=%CD%\%FFPLAY_EXE%
 popd
 
-echo.
 set COMMAND=%FFPLAY_EXE_ABS% %*
+
+echo.
 echo %COMMAND%
 
 if "%APP_DEBUG%" == "" (

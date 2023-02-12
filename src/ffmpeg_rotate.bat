@@ -15,13 +15,13 @@ set "INFILE=%~1"
 set "ROTATION=%~2"
 set "OUTFILE=%~3"
 
-echo ********************************************************
+echo **********************************************************************************************
 echo   Video rotate v%APP_VERSION%
 echo   Usage: %~nx0 ^<infile^> ^<rotation^> [outfile]
 echo   Notes:
 echo   - only changes [rotate] flag in metadata video
 echo   - make sure your video player can read this flag
-echo ********************************************************
+echo **********************************************************************************************
 echo Inputs:
 echo    INFILE: "%INFILE%"
 echo  ROTATION: "%ROTATION%"
@@ -33,7 +33,7 @@ REM Verify:
 call _inputfile.bat "%INFILE%" silent || goto :end
 
 if "%ROTATION%" == "" (
-	echo [ERROR] Empty ROTATION!
+	echo [%~n0] Empty ROTATION!
 	exit /b 400
 )
 

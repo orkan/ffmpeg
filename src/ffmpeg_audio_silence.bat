@@ -16,10 +16,10 @@ set "DURATION=%~2"
 set "CHANNELS=%~3"
 set "RATE=%~4"
 
-echo ************************************************************************
+echo **********************************************************************************************
 echo   Generate audio silence v%APP_VERSION%
 echo   Usage: %~nx0 ^<outfile^> ^<duration^> [channels] [rate]
-echo ************************************************************************
+echo **********************************************************************************************
 echo Inputs:
 echo   OUTFILE: "%OUTFILE%"
 echo  DURATION: "%DURATION%"
@@ -29,11 +29,11 @@ echo.
 
 REM Verify: --------------------------------------------
 if "%OUTFILE%" == "" (
-	echo [ERROR] Empty OUTFILE!
+	echo [%~n0] Empty OUTFILE!
 	exit /b 400
 )
 if "%DURATION%" == "" (
-	echo [ERROR] Empty DURATION!
+	echo [%~n0] Empty DURATION!
 	exit /b 400
 )
 

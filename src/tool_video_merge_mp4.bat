@@ -11,10 +11,10 @@ pushd %~dp0
 call _config.bat
 call _header.bat "%~nx0"
 
-echo ******************************************
+echo **********************************************************************************************
 echo   Tool: Merge MP4 Videos v%APP_VERSION%
 echo   Note: Only ACC audio is supported
-echo ******************************************
+echo **********************************************************************************************
 echo.
 
 REM -------------------------------------------------------------
@@ -22,7 +22,7 @@ REM Dirs setup:
 :mp4dir
 set /p MP4DIR=Input videos dir: 
 if not exist "%MP4DIR%" (
-	echo [ERROR] Not Not found: "%MP4DIR%"
+	echo [%~n0] Dir not found! "%MP4DIR%"
 	goto :mp4dir
 )
 

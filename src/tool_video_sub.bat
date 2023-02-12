@@ -15,10 +15,10 @@ set "INFILE=%~1"
 set "SUBTITLES=%~2"
 set "NOWAIT=%~3"
 
-echo *********************************************************************
+echo **********************************************************************************************
 echo    Tool: Video subtitles v%APP_VERSION%
 echo   Usage: %~nx0 ^<infile^> [subtitles: infile.srt] [nowait]
-echo *********************************************************************
+echo **********************************************************************************************
 echo Inputs:
 echo     INFILE: "%INFILE%"
 echo  SUBTITLES: "%SUBTITLES%"
@@ -31,7 +31,7 @@ call _inputfile.bat "%INFILE%" silent || goto :end
 
 if "%SUBTITLES%" == "" set SUBTITLES=%~dpn1.srt
 if not exist "%SUBTITLES%" (
-	echo [ERROR] Not found SUBTITLES: "%SUBTITLES%"
+	echo [%~n0] Not found SUBTITLES: "%SUBTITLES%"
 	set APP_ERRORLEVEL=404
 	goto :end
 )

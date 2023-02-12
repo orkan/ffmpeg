@@ -18,12 +18,12 @@ set "OUTFILE=%~4"
 set "STREAMS=%~5"
 set "RECALL=%~6"
 
-echo ***************************************************************
+echo **********************************************************************************************
 echo   Cut video by start/end timestamps v%APP_VERSION%
 echo     Usage: %~nx0 ^<infile^> [start] [end] [outfile] [streams] [recall]
 echo   Example: %~nx0 "infile.mp4" 10:08 1:25:18
 echo      Note: [start] and [end] are optional, use "" for defaults
-echo ***************************************************************
+echo **********************************************************************************************
 echo Inputs:
 echo   INFILE: "%INFILE%"
 echo       SS: "%SS%"
