@@ -17,10 +17,10 @@ REM set APP_ERROR=1
 REM -------------------------------------------------------------
 REM Setup:
 set "APP_NAME=ork-ffmpeg"
-set "APP_HOME=https://github.com/orkan/ffmpeg"
+set "APP_URL=https://github.com/orkan/ffmpeg"
 set "APP_EMAIL=Orkan <orkans+ffmpeg@gmail.com>"
-set "APP_YEAR=2023"
-set "APP_VERSION=2.1.1"
+set "APP_YEAR=2021-2023"
+set "APP_VERSION=2.2.0"
 set "APP_LONGNAME=%APP_NAME% v%APP_VERSION%"
 
 REM Project dir from [vendor] dir
@@ -61,7 +61,7 @@ REM -------------------------------------------------------------
 REM Meta:
 REM Tags supported by ffmpeg/mp4: https://superuser.com/a/1208277/221381
 REM To copy all metadata: -map_metadata 0
-set "META_COPYRIGHT=%APP_LONGNAME% - %PROJECT_DIR% - Copyright 2021-%APP_YEAR% %APP_EMAIL%"
+set "META_COPYRIGHT=%APP_LONGNAME% - %APP_URL% - Copyright %APP_YEAR% %APP_EMAIL%"
 set META_GLOBAL=-map_metadata 0 -metadata copyright="%META_COPYRIGHT%"
 
 REM -------------------------------------------------------------

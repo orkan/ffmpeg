@@ -29,7 +29,7 @@ call _inputfile.bat "%INFILE%" silent || goto :end
 
 REM -------------------------------------------------------------
 REM User:
-set /p CRF=CRF value [quality 0(hi)-51(low): 23]:
+set /p CRF=CRF value [quality 0(hi)-51(low): 23]: 
 
 echo Extra options:
 echo - video size:       -s hd720 (1280x720), -s pal (720x576)
@@ -38,7 +38,7 @@ echo - audio AC3 to AAC: -map v:0 -map a:0 -c:a aac -ac 2 -ar 44100 -ab 192k -c:
 echo - FLV to MP4:       -map v:0 -map a:0 -c:a aac -ab 128k
 echo - audio resample:   -c:a aac -ar 44100 -ab 128k
 echo - bitrate limit:    -b:v 3M -maxrate 5M -bufsize 1M
-set /p EXTRA=EXTRA [-c:a copy]:
+set /p EXTRA=EXTRA [-c:a copy]: 
 
 REM -------------------------------------------------------------
 REM Command:
