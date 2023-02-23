@@ -1,6 +1,6 @@
 ![ffmpeg-logo](https://user-images.githubusercontent.com/129182/109426413-f506b680-79ed-11eb-9792-c09119ed708a.jpg)
 
-# ork-ffmpeg `v2.2.0`
+# ork-ffmpeg `v2.2.1`
 Convert your media files quickly with FFmpeg library.
 
 ---
@@ -55,7 +55,7 @@ echo ffmpeg_mp3.bat "D:\clips\*.avi"
 [Orkan](https://github.com/orkan)
 
 ### Updated
-Mon, 13 Feb 2023 17:12:07 +01:00
+Thu, 23 Feb 2023 17:26:22 +01:00
 
 ### License
 MIT

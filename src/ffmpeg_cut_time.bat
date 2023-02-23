@@ -89,7 +89,7 @@ set RECALL_FILE=%~dpn0.[recall][%DATETIME%][%OUT_FILENAME%][%SS_STR%][%TO_STR%].
 if "%RECALL%" == "" (
 	echo %~nx0 %* "%%~nx0" > "%RECALL_FILE%"
 ) else (
-	set RECALL_FILE=%~dp0%RECALL%
+	set "RECALL_FILE=%~dp0%RECALL%"
 )
 
 REM -------------------------------------------------------------
