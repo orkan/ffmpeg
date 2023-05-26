@@ -20,7 +20,7 @@ set "APP_NAME=ork-ffmpeg"
 set "APP_URL=https://github.com/orkan/ffmpeg"
 set "APP_EMAIL=Orkan <orkans+ffmpeg@gmail.com>"
 set "APP_YEAR=2021-2023"
-set "APP_VERSION=2.2.1"
+set "APP_VERSION=2.2.2"
 set "APP_LONGNAME=%APP_NAME% v%APP_VERSION%"
 
 REM Project dir from [vendor] dir
@@ -29,13 +29,11 @@ set PROJECT_DIR=%CD%
 popd
 
 set APP_TOOLS_PATH=%APP_TOOLS_PATH%;%~dp0
+set LOG_DIR=%PROJECT_DIR%\var\log
 
 REM Create date-time unique string, eg. 2022011209032911
 set DATETIME=%DATE%.%TIME: =0%
 for /f "tokens=1-7 delims=/:.," %%a in ("%DATETIME%") do set DATETIME=%%c%%b%%a%%d%%e%%f%%g
-
-set LOG_DIR=%PROJECT_DIR%\var\log
-if exist "%LOG_DIR%" set LOG_FILE=%LOG_DIR%\%APP_NAME%.log
 
 REM -------------------------------------------------------------
 REM Binaries:

@@ -1,31 +1,30 @@
 ![ffmpeg-logo](https://user-images.githubusercontent.com/129182/109426413-f506b680-79ed-11eb-9792-c09119ed708a.jpg)
 
-# ork-ffmpeg `v2.2.1`
+# ork-ffmpeg `v2.2.2`
 Convert your media files quickly with FFmpeg library.
 
 ---
 
-The main idea is to limit the command line switches passed to FFmpeg.exe while keeping full control of the conversion process.
-Use Windows context menu (Send To) or drag&drop features to quickly convert your media.
-Use convert.bat tool to batch proccess multiple media files from different locations at once.
+The main idea is to limit the command line switches passed to `ffmpeg.exe` while keeping full control of the conversion process.
+Use Windows "Send To" menu or "Drag & Drop" features to quickly convert your media.
+Use `convert.bat` tool to batch proccess multiple media files from different locations at once.
 
 ## Installation
 
 ### Environment variables:
-Change default config values by setting `ORKAN_FFMPEG_USER_CONFIG` environment variable pointing to user config file:
-`set ORKAN_FFMPEG_USER_CONFIG=path\to\usr\config.bat`
+Customize default config values by declaring user config file environment variable `ORKAN_FFMPEG_USER_CONFIG`
+Example: `ORKAN_FFMPEG_USER_CONFIG=path\to\usr\config.bat`
 
-Change ffmpeg binaries path:
-`set FFMPEG_HOME=path\to\ffmpeg-static`
-
-Change log file:
-`set LOG_FILE=path\to\file.log`
+From this file you can:
+- customize ffmpeg binaries location: `set FFMPEG_HOME=path\to\ffmpeg-static`
+- change log file location: `set LOG_FILE=path\to\file.log`
+- extend Autoloader locations: `set APP_TOOLS_PATH=path\to\user\tools` (same format as Windows %PATH%)
+- this way you can basically change every option from default `src\_config.bat` 
 
 ### Autoloader:
-The `autoload.bat` loads user config and also is used as the main entry point to load any tool located on `%APP_TOOLS_PATH%`.
-This environment variable can be extended by user config. It has the same format as Windows %PATH% variable (ie. dir paths separated by semicolon)
+The `autoload.bat` is the main entry point for any tool located on `%APP_TOOLS_PATH%`.
 Usage: `autoload.bat <tool_*.bat> [arg1 ... arg8]`
-More info can be found in autoload.bat header section.
+Check autoload.bat header section for more info.
 
 ### Send To:
 1. Create shortcut in `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\SendTo`
@@ -34,6 +33,7 @@ More info can be found in autoload.bat header section.
 2. Right click on your media file, choose: Send To > Convert to mp4
 
 ## Batch processing:
+Proccess multiple files from different locations at once with `convert.bat` tool.
 Command: `autoload.bat convert.bat files.bat`
 
 In `files.bat`: 
@@ -55,7 +55,7 @@ echo ffmpeg_mp3.bat "D:\clips\*.avi"
 [Orkan](https://github.com/orkan)
 
 ### Updated
-Thu, 23 Feb 2023 17:26:22 +01:00
+Fri, 26 May 2023 12:50:57 +02:00
 
 ### License
 MIT

@@ -18,4 +18,4 @@ if "%APP_DEBUG%" NEQ "" (
 	exit /b
 )
 
-if exist "%LOG_FILE%" echo %RECORD% >> "%LOG_FILE%"
+if exist "%LOG_DIR%" echo %RECORD% >> "%LOG_DIR%\%APP_NAME%.log"
