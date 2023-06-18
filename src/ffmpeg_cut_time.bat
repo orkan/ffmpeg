@@ -119,7 +119,7 @@ REM -------------------------------------------------------------
 REM Command:
 :run
 TITLE %OUTNAME%
-call _log.bat %~nx0 %*
+call _log.bat [:%UNIQUE1%:] %~nx0 %*
 REM https://wjwoodrow.wordpress.com/2013/02/04/correcting-for-audiovideo-sync-issues-with-the-ffmpeg-programs-itsoffset-switch/
 REM https://superuser.com/questions/138331/using-ffmpeg-to-cut-up-video
 REM https://stackoverflow.com/questions/14005110/how-to-split-a-video-using-ffmpeg-so-that-each-chunk-starts-with-a-key-frame
@@ -133,6 +133,7 @@ REM -------------------------------------------------------------
 REM Finalize:
 :end
 call :clean
+call _log.bat [:%UNIQUE1%:] %~nx0 %*
 exit /b %FFMPEG_ERRORLEVEL%
 
 REM =============================================================
