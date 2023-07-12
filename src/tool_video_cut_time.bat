@@ -36,9 +36,8 @@ REM User:
 set /p START=Start time [0:0:0]: 
 set /p END=End time [End of video]: 
 
-REM Treat spaces as : in time tags
-if "%START%" NEQ "" set START=%START: =:%
-if "%END%" NEQ "" set END=%END: =:%
+for /f "tokens=*" %%x in ( 'call _timestamp.bat "%START%"' ) do set START=%%x
+for /f "tokens=*" %%x in ( 'call _timestamp.bat "%END%"' ) do set END=%%x
 
 REM -------------------------------------------------------------
 REM Command:
