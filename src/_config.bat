@@ -20,7 +20,7 @@ set "APP_NAME=ork-ffmpeg"
 set "APP_URL=https://github.com/orkan/ffmpeg"
 set "APP_EMAIL=Orkan <orkans+ffmpeg@gmail.com>"
 set "APP_YEAR=2021-2023"
-set "APP_VERSION=2.4.0"
+set "APP_VERSION=2.4.1"
 set "APP_LONGNAME=%APP_NAME% v%APP_VERSION%"
 
 REM Project dir from [vendor] dir
