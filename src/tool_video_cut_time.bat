@@ -15,16 +15,18 @@ set "INFILE=%~1"
 set "OUTFILE=%~2"
 set "NOWAIT=%~3"
 set "STREAMS=%~4"
+set "EXTRA=%~5"
 
 echo **********************************************************************************************
 echo    Tool: Video cut by timestamps v%APP_VERSION%
-echo   Usage: %~nx0 ^<infile^> [outfile] [nowait] [streams]
+echo   Usage: %~nx0 ^<infile^> [outfile] [nowait] [streams] [extra]
 echo **********************************************************************************************
 echo Inputs:
 echo   INFILE: "%INFILE%"
 echo  OUTFILE: "%OUTFILE%"
 echo   NOWAIT: "%NOWAIT%"
 echo  STREAMS: "%STREAMS%"
+echo    EXTRA: "%EXTRA%"
 echo.
 
 REM -------------------------------------------------------------
@@ -42,7 +44,7 @@ for /f "tokens=*" %%x in ( 'call _timestamp.bat "%END%"' ) do set END=%%x
 REM -------------------------------------------------------------
 REM Command:
 echo.
-call ffmpeg_cut_time.bat "%INFILE%" "%START%" "%END%" "%OUTFILE%" "%STREAMS%"
+call ffmpeg_cut_time.bat "%INFILE%" "%START%" "%END%" "%OUTFILE%" "%STREAMS%" "" "%EXTRA%"
 if %ERRORLEVEL% GEQ 1 goto :end
 
 REM -------------------------------------------------------------

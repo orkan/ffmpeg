@@ -17,10 +17,13 @@ set "TO=%~3"
 set "OUTFILE=%~4"
 set "STREAMS=%~5"
 set "RECALL=%~6"
+set "EXTRA=%~7"
 
 echo **********************************************************************************************
 echo   Cut video by start/end timestamps v%APP_VERSION%
-echo     Usage: %~nx0 ^<infile^> [start] [end] [outfile] [streams] [recall]
+echo     Usage: %~nx0 ^<infile^> [start] [end] [outfile] [streams] [recall] [extra]
+echo            [extra == rewait] - reset wait file
+echo            [extra == noqueue] - skip wait queue
 echo   Example: %~nx0 "infile.mp4" 10:08 1:25:18
 echo      Note: [start] and [end] are optional, use "" for defaults
 echo **********************************************************************************************
@@ -31,14 +34,15 @@ echo       TO: "%TO%"
 echo  OUTFILE: "%OUTFILE%"
 echo  STREAMS: "%STREAMS%"
 echo   RECALL: "%RECALL%"
+echo    EXTRA: "%EXTRA%"
 echo.
 
 REM -------------------------------------------------------------
 REM Reset wait file?
 set FFMPEG_ERRORLEVEL=0
 set WAIT_FILE=%~dpn0.lock
-
-if "%INFILE%" == "" (
+if "%EXTRA%" == "rewait" (
+	echo EXTRA: Reset wait file!
 	call :waitEnd
 	goto :end
 )
@@ -100,12 +104,17 @@ set METAS=%META_GLOBAL% %META_LOCATION% -metadata comment="%~nx0 [%SS_ARG%] [%TO
 
 REM -------------------------------------------------------------
 REM Wait:
+if "%EXTRA%" == "noqueue" (
+	echo EXTRA: Skip queue!
+	goto :run
+)
 REM Don't run multiple threads on the same time b/c of disk usage overhead
 set WAIT_TIME=4
 set WAIT_LOOP=0
 set WAIT_TOTAL=0
 :wait
 if not exist "%WAIT_FILE%" (
+	echo Create lock file: "%WAIT_FILE%"
 	echo "%OUTFILE%" > "%WAIT_FILE%"
 	goto :run
 )
@@ -150,8 +159,10 @@ ping 127.0.0.1 -n %1 > nul
 goto :eof
 
 REM -------------------------------------------------------------
-REM Release lock file for next thread
 :waitEnd
+REM Release lock file for next thread
+REM In [noqueue] mode dont touch lock file!
+if "%EXTRA%" == "noqueue" goto :eof
 if %FFMPEG_ERRORLEVEL% == 0 (
 	if exist "%WAIT_FILE%" (
 		del "%WAIT_FILE%"
