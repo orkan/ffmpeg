@@ -1,9 +1,10 @@
 @echo off
 REM =============================================================
-REM ork-ffmpeg (W)indows (C)ontext (T)ools v2 (c) 2021-2023 Orkan
+REM ork-ffmpeg (W)indows (C)ontext (T)ools
+REM https://github.com/orkan/ffmpeg
 REM -------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
-REM https://github.com/orkan/ffmpeg
+REM Copyright (c) 2021 Orkan <orkans+ffmpeg@gmail.com>
 REM =============================================================
 
 REM Let _status.bat return immediately after each tool_*.bat

@@ -1,9 +1,10 @@
 @echo off
 REM =============================================================
-REM ork-ffmpeg (W)indows (C)ontext (T)ools v2 (c) 2021-2023 Orkan
+REM ork-ffmpeg (W)indows (C)ontext (T)ools
+REM https://github.com/orkan/ffmpeg
 REM -------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
-REM https://github.com/orkan/ffmpeg
+REM Copyright (c) 2021 Orkan <orkans+ffmpeg@gmail.com>
 REM =============================================================
 
 setlocal
@@ -22,8 +23,8 @@ set "EXTRA=%~7"
 echo **********************************************************************************************
 echo   Cut video by start/end timestamps v%APP_VERSION%
 echo     Usage: %~nx0 ^<infile^> [start] [end] [outfile] [streams] [recall] [extra]
-echo            [extra == rewait] - reset wait file
-echo            [extra == noqueue] - skip wait queue
+REM echo            [extra == rewait] - reset wait file
+REM echo            [extra == noqueue] - skip wait queue
 echo   Example: %~nx0 "infile.mp4" 10:08 1:25:18
 echo      Note: [start] and [end] are optional, use "" for defaults
 echo **********************************************************************************************

@@ -1,9 +1,10 @@
 @echo off
 REM =============================================================
-REM ork-ffmpeg (W)indows (C)ontext (T)ools v2 (c) 2021-2023 Orkan
+REM ork-ffmpeg (W)indows (C)ontext (T)ools
+REM https://github.com/orkan/ffmpeg
 REM -------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
-REM https://github.com/orkan/ffmpeg
+REM Copyright (c) 2021 Orkan <orkans+ffmpeg@gmail.com>
 REM =============================================================
 
 if "%SRC_CONFIG_LOADED%" NEQ "" exit /b
@@ -19,8 +20,8 @@ REM Setup:
 set "APP_NAME=ork-ffmpeg"
 set "APP_URL=https://github.com/orkan/ffmpeg"
 set "APP_EMAIL=Orkan <orkans+ffmpeg@gmail.com>"
-set "APP_YEAR=2021-2023"
-set "APP_VERSION=2.5.0"
+set "APP_YEAR=2021-2024"
+set "APP_VERSION=2.5.1"
 set "APP_LONGNAME=%APP_NAME% v%APP_VERSION%"
 
 REM Project dir from [vendor] dir
