@@ -52,7 +52,9 @@ set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%BRATE%] [%SRATE%]"
 REM -------------------------------------------------------------
 REM Command:
 call _log.bat %~nx0 %*
-call ffmpeg -y -i "%INFILE%" -vn %BRATE% %SRATE% %METAS% "%OUTFILE%"
+REM Video stream is automaticaly stripped off. No need for [-vn]
+REM If multiple covers available - only first is copied to stream #0:0 with [-c:v copy]
+call ffmpeg -y -i "%INFILE%" -c:v copy %BRATE% %SRATE% %METAS% "%OUTFILE%"
 if %ERRORLEVEL% GEQ 1 goto :end
 
 REM -------------------------------------------------------------
