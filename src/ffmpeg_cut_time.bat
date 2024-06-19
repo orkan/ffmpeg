@@ -83,18 +83,18 @@ if "%OUTFILE%" == "" (
 )
 set OUTNAME=%OUT_BASENAME%.[%SS_STR%][%TO_STR%]%OUT_EXT%
 set OUTFILE=%OUT_PATH%%OUTNAME%
-REM Segment:
-REM set OUTFILE=%OUT_PATH%%OUT_BASENAME%.[%SS_STR%][%TO_STR%][seg-%%%%03d]%OUT_EXT%
 
 REM -------------------------------------------------------------
 REM Recall:
 REM Use "recall" file to remember command in case of system crash
 REM Or... remove current "recall" file on SUCCESS
 set RECALL_FILE=%~dpn0.[recall][%DATETIME%][%OUT_FILENAME%][%SS_STR%][%TO_STR%].bat
-if "%RECALL%" == "" (
-	echo %~nx0 %* "%%~nx0" > "%RECALL_FILE%"
-) else (
+set RECALL_ECHO=%~nx0 "%~1" "%~2" "%~3" "%~4" "%~5" "%%~nx0"
+
+if "%RECALL%" NEQ "" (
 	set "RECALL_FILE=%~dp0%RECALL%"
+) else (
+	echo %RECALL_ECHO% > "%RECALL_FILE%"
 )
 
 REM -------------------------------------------------------------

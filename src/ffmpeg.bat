@@ -36,7 +36,7 @@ echo.
 echo %COMMAND%
 
 if "%APP_ERROR%" NEQ "" (
-	echo [%~n0] Exit code: "%APP_ERROR%"]
+	echo [%~n0] Exit code: "%APP_ERROR%"
 	exit /b %APP_ERROR%
 )
 
