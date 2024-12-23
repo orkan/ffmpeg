@@ -39,7 +39,7 @@ REM User:
 set /p START=Start time [0:0:0]: 
 set /p END=End time [End of video]: 
 
-for /f "tokens=*" %%x in ( 'call _timestamp.bat "%START%"' ) do set START=%%x
+for /f "tokens=*" %%x in ( 'call _timestamp.bat "%START%" "0:0:0"' ) do set START=%%x
 for /f "tokens=*" %%x in ( 'call _timestamp.bat "%END%"' ) do set END=%%x
 
 REM ---------------------------------------------------------------------------
