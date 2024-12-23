@@ -1,12 +1,12 @@
 @echo off
-REM =============================================================
+REM ===========================================================================
 REM Starter script for ork-ffmpeg tools.
 REM Usage: autoload.bat <tool_*.bat> [arg1 ... arg8]
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM This script will look for <tool_*.bat> in all defined
 REM locations from %APP_TOOLS_PATH%.
 REM Tip: Use the user config.bat file to add more paths!
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Example:
 REM 1. Create starter file on system path:
 REM [ork-ffmpeg.bat]
@@ -16,7 +16,7 @@ REM 2. Call it with commands:
 REM ork-ffmpeg.bat convert.bat files_default.bat <-- found [files_default.bat] in usr\
 REM ork-ffmpeg.bat tool_mp4.bat myfile.mov arg2 arg3 <-- found [tool_mp4.bat] in src\
 REM ork-ffmpeg.bat tool_ork.bat myfile.avi arg2 arg3 <-- found [tool_ork.bat] in usr\
-REM =============================================================
+REM ===========================================================================
 
 setlocal
 pushd %~dp0

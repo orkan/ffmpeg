@@ -1,11 +1,11 @@
 @echo off
-REM =============================================================
+REM ===========================================================================
 REM ork-ffmpeg (W)indows (C)ontext (T)ools
 REM https://github.com/orkan/ffmpeg
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM Copyright (c) 2021 Orkan <orkans+ffmpeg@gmail.com>
-REM =============================================================
+REM ===========================================================================
 
 setlocal
 pushd %~dp0
@@ -24,11 +24,11 @@ echo  INFILE: "%INFILE%"
 echo  NOWAIT: "%NOWAIT%"
 echo.
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Verify:
 call _inputfile.bat "%INFILE%" silent || goto :end
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM User:
 set /p CRF=CRF value [quality 0(hi)-51(low): 23]: 
 
@@ -41,13 +41,13 @@ echo - audio resample:   -c:a aac -ar 44100 -ab 128k
 echo - bitrate limit:    -b:v 3M -maxrate 5M -bufsize 1M
 set /p EXTRA=EXTRA [-c:a copy]: 
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Command:
 echo.
 call ffmpeg_mp4.bat "%INFILE%" "%CRF%" "%EXTRA%"
 if %ERRORLEVEL% GEQ 1 goto :end
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Finalize:
 :end
 call _status.bat "%NOWAIT%"

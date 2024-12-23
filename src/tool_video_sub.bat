@@ -1,11 +1,11 @@
 @echo off
-REM =============================================================
+REM ===========================================================================
 REM ork-ffmpeg (W)indows (C)ontext (T)ools
 REM https://github.com/orkan/ffmpeg
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM Copyright (c) 2021 Orkan <orkans+ffmpeg@gmail.com>
-REM =============================================================
+REM ===========================================================================
 
 setlocal
 pushd %~dp0
@@ -26,7 +26,7 @@ echo  SUBTITLES: "%SUBTITLES%"
 echo     NOWAIT: "%NOWAIT%"
 echo.
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Verify:
 call _inputfile.bat "%INFILE%" silent || goto :end
 
@@ -37,18 +37,18 @@ if not exist "%SUBTITLES%" (
 	goto :end
 )
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Config:
 set OUTFILE=%~dpn1.[sub]%~x1
 set METAS=%META_GLOBAL% -metadata comment="%~nx0 : '%~nx1' -c:s mov_text"
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Command:
 REM https://www.nikse.dk/subtitleedit/AddSubtitlesToVideo
 call ffmpeg -y -i "%INFILE%" -i "%SUBTITLES%" -c:v copy -c:a copy -c:s mov_text %METAS% "%OUTFILE%"
 if %ERRORLEVEL% GEQ 1 goto :end
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Finalize:
 :end
 call _status.bat "%NOWAIT%" %APP_ERRORLEVEL%

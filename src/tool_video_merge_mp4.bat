@@ -1,11 +1,11 @@
 @echo off
-REM =============================================================
+REM ===========================================================================
 REM ork-ffmpeg (W)indows (C)ontext (T)ools
 REM https://github.com/orkan/ffmpeg
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM Copyright (c) 2021 Orkan <orkans+ffmpeg@gmail.com>
-REM =============================================================
+REM ===========================================================================
 
 setlocal
 pushd %~dp0
@@ -18,7 +18,7 @@ echo   Note: Only ACC audio is supported
 echo **********************************************************************************************
 echo.
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Dirs setup:
 :mp4dir
 set /p MP4DIR=Input videos dir: 
@@ -47,7 +47,7 @@ set /p OUTDIR=Output dir [%DEFAULT_TOOL_VIDEO_MERGE_OUTDIR%]:
 if "%OUTDIR%" == "" set OUTDIR=%DEFAULT_TOOL_VIDEO_MERGE_OUTDIR%
 call _inputfile.bat "%OUTDIR%" silent || goto :outdir
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Create intermediate TS files:
 set COUNT=0
 set TODEL=
@@ -61,27 +61,27 @@ if "%COUNT%" == "0" (
 	goto :end
 )
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Concat videos:
 call ffmpeg -y -i "concat:%CONCAT%" -c copy -bsf:a aac_adtstoasc "%OUTDIR%\%FIRSTNAME%.[merged].mp4" || goto :end
 if %ERRORLEVEL% GEQ 1 goto :end
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Delete intermediate files:
 echo.
 set /p DELYESNO=Delete temp files? [Y/n]: 
 if "%DELYESNO%" == "n" goto :end
 del %TODEL%
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Finalize:
 :end
 call _status.bat "" %APP_ERRORLEVEL%
 exit /b %ERRORLEVEL%
 
-REM =============================================================
+REM ===========================================================================
 REM Functions:
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 :toIntermediate
 set NAME=%~n1
 set TSNAME=%TMPDIR%\%NAME%.ts

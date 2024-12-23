@@ -1,11 +1,11 @@
 @echo off
-REM =============================================================
+REM ===========================================================================
 REM ork-ffmpeg (W)indows (C)ontext (T)ools
 REM https://github.com/orkan/ffmpeg
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM Copyright (c) 2021 Orkan <orkans+ffmpeg@gmail.com>
-REM =============================================================
+REM ===========================================================================
 
 REM Show all
 REM ffprobe -show_format video-xyz.mov
@@ -36,7 +36,7 @@ REM TAG:make=Apple
 REM TAG:make-pol=Apple
 REM [/FORMAT]
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Command:
 REM Display only location string from metadata
 call %~dp0ffprobe -v quiet -print_format compact=print_section=0:nokey=1:escape=csv -show_entries format_tags=location "%~1"

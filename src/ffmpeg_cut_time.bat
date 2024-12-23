@@ -1,11 +1,11 @@
 @echo off
-REM =============================================================
+REM ===========================================================================
 REM ork-ffmpeg (W)indows (C)ontext (T)ools
 REM https://github.com/orkan/ffmpeg
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM Copyright (c) 2021 Orkan <orkans+ffmpeg@gmail.com>
-REM =============================================================
+REM ===========================================================================
 
 setlocal
 pushd %~dp0
@@ -38,7 +38,7 @@ echo   RECALL: "%RECALL%"
 echo    EXTRA: "%EXTRA%"
 echo.
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Reset wait file?
 set FFMPEG_ERRORLEVEL=0
 set WAIT_FILE=%~dpn0.lock
@@ -48,11 +48,11 @@ if "%EXTRA%" == "rewait" (
 	goto :end
 )
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Verify:
 call _inputfile.bat "%INFILE%" silent || goto :end
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Config:
 set SS_ARG=-ss %SS%
 set TO_ARG=-to %TO%
@@ -60,14 +60,14 @@ if "%SS_ARG%" == "-ss " set SS_ARG=-ss 0
 if "%TO_ARG%" == "-to " set TO_ARG=
 if "%STREAMS%" == "" set STREAMS=-map 0:v? -map 0:a:0? -map 0:a:1? -map 0:s:0?
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Strings:
 set SS_STR=%SS_ARG::=.%
 if "%TO_ARG%" NEQ "" (
 	set TO_STR=%TO_ARG::=.%
 )
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Outfile:
 if "%OUTFILE%" == "" (
 	REM Use quoted set "FILE=name with ().ext" in case of parenthesized file names!
@@ -84,7 +84,7 @@ if "%OUTFILE%" == "" (
 set OUTNAME=%OUT_BASENAME%.[%SS_STR%][%TO_STR%]%OUT_EXT%
 set OUTFILE=%OUT_PATH%%OUTNAME%
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Recall:
 REM Use "recall" file to remember command in case of system crash
 REM Or... remove current "recall" file on SUCCESS
@@ -97,13 +97,13 @@ if "%RECALL%" NEQ "" (
 	echo %RECALL_ECHO% > "%RECALL_FILE%"
 )
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM META tags:
 for /f "tokens=*" %%x in ( 'call _location.bat "%INFILE%"' ) do set LOCATION=%%x
 if "%LOCATION%" NEQ "" set META_LOCATION=-metadata description="gps:[%LOCATION%]"
 set METAS=%META_GLOBAL% %META_LOCATION% -metadata comment="%~nx0 [%SS_ARG%] [%TO_ARG%]"
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Wait:
 if "%EXTRA%" == "noqueue" (
 	echo EXTRA: Skip queue!
@@ -125,7 +125,7 @@ TITLE %WAIT_TOTAL%s
 call :waitSleep %WAIT_TIME%
 goto :wait
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Command:
 :run
 TITLE %OUTNAME%
@@ -139,16 +139,16 @@ REM https://www.ffmpeg.org/ffmpeg-formats.html#toc-segment_002c-stream_005fsegme
 REM call ffmpeg -y -i "%INFILE%" %SS_ARG% %TO_ARG% -f segment -segment_time 999999 -reset_timestamps 1 %STREAMS% -c copy %METAS% "%OUTFILE%"
 set FFMPEG_ERRORLEVEL=%ERRORLEVEL%
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Finalize:
 :end
 call :clean
 call _log.bat [:%UNIQUE1%:] %~nx0 %*
 exit /b %FFMPEG_ERRORLEVEL%
 
-REM =============================================================
+REM ===========================================================================
 REM Functions:
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 :waitSleep
 if "%WAIT_SHOW%" == "" (
 	echo.
@@ -159,7 +159,7 @@ REM Pause for X sec
 ping 127.0.0.1 -n %1 > nul
 goto :eof
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 :waitEnd
 REM Release lock file for next thread
 REM In [noqueue] mode dont touch lock file!
@@ -171,7 +171,7 @@ if %FFMPEG_ERRORLEVEL% == 0 (
 )
 goto :eof
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 :clean
 if %FFMPEG_ERRORLEVEL% == 0 (
 	if exist "%RECALL_FILE%" (

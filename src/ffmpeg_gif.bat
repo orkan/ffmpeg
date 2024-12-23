@@ -1,11 +1,11 @@
 @echo off
-REM =============================================================
+REM ===========================================================================
 REM ork-ffmpeg (W)indows (C)ontext (T)ools
 REM https://github.com/orkan/ffmpeg
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM Copyright (c) 2021 Orkan <orkans+ffmpeg@gmail.com>
-REM =============================================================
+REM ===========================================================================
 
 setlocal
 pushd %~dp0
@@ -29,11 +29,11 @@ echo       TO: "%TO%"
 echo  OUTFILE: "%OUTFILE%"
 echo.
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Verify:
 call _inputfile.bat "%INFILE%" silent || goto :end
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Config:
 set SS=-ss %SS%
 set TO=-to %TO%
@@ -54,14 +54,14 @@ if "%OUTFILE%" == "" (
 set OUTFILE=%PATH1%.[%SS_STR%][%TO_STR%].gif
 set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%SS%] [%TO%] [-filter_complex ...]"
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Command:
 call _log.bat %~nx0 %*
 REM https://engineering.giphy.com/how-to-make-gifs-with-ffmpeg/
 call ffmpeg -y %SS% %TO% -i "%INFILE%" -filter_complex "[0:v] fps=12,scale=480:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" %METAS% "%OUTFILE%"
 if %ERRORLEVEL% GEQ 1 goto :end
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Finalize:
 :end
 exit /b %ERRORLEVEL%

@@ -1,11 +1,11 @@
 @echo off
-REM =============================================================
+REM ===========================================================================
 REM ork-ffmpeg (W)indows (C)ontext (T)ools
 REM https://github.com/orkan/ffmpeg
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM This file is part of orkan/ffmpeg package
 REM Copyright (c) 2021 Orkan <orkans+ffmpeg@gmail.com>
-REM =============================================================
+REM ===========================================================================
 
 setlocal
 pushd %~dp0
@@ -29,7 +29,7 @@ echo  SECONDS: "%SECONDS%"
 echo  OUTFILE: "%OUTFILE%"
 echo.
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Verify:
 call _inputfile.bat "%INFILE%" silent || goto :end
 
@@ -38,7 +38,7 @@ if "%SECONDS%" == "" (
 	exit /b 400
 )
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Config:
 REM https://superuser.com/questions/982342/in-ffmpeg-how-to-delay-only-the-audio-of-a-mp4-video-without-converting-the-au
 REM If you need to delay video by 3.84 seconds, use a command like this:
@@ -59,13 +59,13 @@ if "%OUTFILE%" == "" (
 
 set METAS=%META_GLOBAL% -metadata comment="%~nx0 [%OFFSET%] [%MAP%]"
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Command:
 call _log.bat %~nx0 %*
 call ffmpeg -y -i "%INFILE%" %OFFSET% -i "%INFILE%" %MAP% -c copy %METAS% "%OUTFILE%"
 if %ERRORLEVEL% GEQ 1 goto :end
 
-REM -------------------------------------------------------------
+REM ---------------------------------------------------------------------------
 REM Finalize:
 :end
 exit /b %ERRORLEVEL%
