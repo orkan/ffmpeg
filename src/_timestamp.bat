@@ -10,7 +10,7 @@ REM ===========================================================================
 REM Normalize timestamp string to hh:mm:ss format (with zero padding)
 REM Usage:
 REM   %1 - Raw timestamp eg. "1" "2:31" "5 46" "1 12 76"
-REM   %2 - Default timestamp to return if %1 is empty
+REM   %2 - Default timestamp to return "as-is" if %1 is empty
 
 setlocal
 set "STR=%~1"
@@ -18,7 +18,7 @@ set "DEF=%~2"
 
 REM Return default if timestamp empty
 if "%STR%" == "" (
-	REM For undefined DEF cmd.exe will return 'echo'
+	REM NOTE: For undefined DEF cmd.exe will return 'echo'
 	if "%DEF%" NEQ "" echo %DEF%
 	exit /b
 )

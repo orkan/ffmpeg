@@ -3,19 +3,16 @@ REM ===========================================================================
 REM Starter script for ork-ffmpeg tools.
 REM Usage: autoload.bat <tool_*.bat> [arg1 ... arg8]
 REM ---------------------------------------------------------------------------
-REM This script will look for <tool_*.bat> in all defined
-REM locations from %APP_TOOLS_PATH%.
-REM Tip: Use the user config.bat file to add more paths!
-REM ---------------------------------------------------------------------------
-REM Example:
-REM 1. Create starter file on system path:
-REM [ork-ffmpeg.bat]
-REM set ORKAN_FFMPEG_USER_CONFIG=D:\...\ork-ffmpeg\usr\bin\config.bat
-REM call D:\...\ork-ffmpeg\vendor\orkan\ffmpeg\src\autoload.bat %*
-REM 2. Call it with commands:
-REM ork-ffmpeg.bat convert.bat files_default.bat <-- found [files_default.bat] in usr\
-REM ork-ffmpeg.bat tool_mp4.bat myfile.mov arg2 arg3 <-- found [tool_mp4.bat] in src\
-REM ork-ffmpeg.bat tool_ork.bat myfile.avi arg2 arg3 <-- found [tool_ork.bat] in usr\
+REM By extending %APP_TOOLS_PATH% you can add your own custom tools locations.
+REM 1. Create custom config: my-config.bat
+REM 	set APP_TOOLS_PATH=%APP_TOOLS_PATH%;D:\MyTools
+REM 	set MY_VALUE=This VAR will be available in all tools
+REM 2. Create custom starter: my-ffmpeg.bat
+REM 	set ORKAN_FFMPEG_USER_CONFIG=path\to\my-config.bat
+REM 	call path\to\this\autoload.bat %*
+REM 3. Run original autoload via custom starter
+REM 	my-ffmpeg.bat convert.bat files_default.bat
+REM		my-ffmpeg.bat tool_mp4.bat myfile.mov arg2 arg3
 REM ===========================================================================
 
 setlocal

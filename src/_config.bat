@@ -21,7 +21,7 @@ set "APP_NAME=ork-ffmpeg"
 set "APP_URL=https://github.com/orkan/ffmpeg"
 set "APP_EMAIL=Orkan <orkans+ffmpeg@gmail.com>"
 set "APP_YEAR=2021-2024"
-set "APP_VERSION=2.7.1"
+set "APP_VERSION=2.7.2"
 set "APP_LONGNAME=%APP_NAME% v%APP_VERSION%"
 
 REM Project dir from [vendor] dir
@@ -34,7 +34,7 @@ set LOG_DIR=%PROJECT_DIR%\var\log
 
 REM Create date-time unique string, eg. 2022011209032911
 set DATETIME=%DATE%.%TIME: =0%
-for /f "tokens=1-7 delims=/:.," %%a in ("%DATETIME%") do set DATETIME=%%c%%b%%a%%d%%e%%f%%g
+for /f "tokens=1-7 delims=/:.," %%A in ("%DATETIME%") do set DATETIME=%%C%%B%%A%%D%%E%%F%%G
 
 REM Create some random numbers
 set UNIQUE1=%RANDOM%
