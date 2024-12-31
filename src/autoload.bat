@@ -17,9 +17,11 @@ REM ===========================================================================
 
 setlocal
 pushd %~dp0
-call %~dp0_config.bat
-call %~dp0_header.bat "%~nx0"
+call _config.bat
+call _header.bat %0 %*
 
+REM ---------------------------------------------------------------------------
+REM Tool locate:
 REM Search for %1 filename in defined locations form %APP_TOOLS_PATH%
 REM Add current script location to help resolving relative paths
 REM Return %~f1 if found, empty otherwise:
@@ -30,4 +32,8 @@ if not exist "%AUTOLOAD_TOOL_ABS%" (
 	exit /b 404
 )
 
-call "%AUTOLOAD_TOOL_ABS%" %2 %3 %4 %5 %6 %7 %8 %9
+REM ---------------------------------------------------------------------------
+REM Tool run:
+set COMMAND=call "%AUTOLOAD_TOOL_ABS%" %2 %3 %4 %5 %6 %7 %8 %9
+if "%APP_DEBUG%" NEQ "" echo %COMMAND%
+%COMMAND%

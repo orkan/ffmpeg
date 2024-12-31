@@ -8,12 +8,13 @@ REM Copyright (c) 2021 Orkan <orkans+ffmpeg@gmail.com>
 REM ===========================================================================
 
 if "%SRC_CONFIG_LOADED%" NEQ "" exit /b
-if "%APP_DEBUG%" NEQ "" echo [APP_CONFIG: %~f0]
 
 REM ---------------------------------------------------------------------------
 REM Debug: Use empty string to clear SWITCH!
 REM set APP_DEBUG=1
 REM set APP_ERROR=1
+
+if "%APP_DEBUG%" NEQ "" echo [APP_CONFIG: %0]
 
 REM ---------------------------------------------------------------------------
 REM Setup:
@@ -21,7 +22,8 @@ set "APP_NAME=ork-ffmpeg"
 set "APP_URL=https://github.com/orkan/ffmpeg"
 set "APP_EMAIL=Orkan <orkans+ffmpeg@gmail.com>"
 set "APP_YEAR=2021-2024"
-set "APP_VERSION=2.7.2"
+set "APP_VERSION=2.7.3"
+set "APP_VERSION_MIN=2.7"
 set "APP_LONGNAME=%APP_NAME% v%APP_VERSION%"
 
 REM Project dir from [vendor] dir

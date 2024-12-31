@@ -8,7 +8,7 @@ REM Copyright (c) 2021 Orkan <orkans+ffmpeg@gmail.com>
 REM ===========================================================================
 
 REM Let _status.bat return immediately after each tool_*.bat
-set APP_NOWAIT=convert
+set APP_NOWAIT=%~n0
 
 REM Set before setlocal! See :end
 set "NOWAIT=%~2"
@@ -16,10 +16,10 @@ set "NOWAIT=%~2"
 setlocal
 pushd %~dp0
 call _config.bat
-call _header.bat "%~nx0"
+call _header.bat %0 %*
 
 set "FILES=%~1"
-REM set "NOWAIT=%~2" // ^^ above ^^
+REM set "NOWAIT=%~2" // @see above
 
 echo **********************************************************************************************
 echo  Batch media converter v%APP_VERSION%

@@ -11,10 +11,8 @@ REM ---------------------------------------------------------------------------
 REM Display [header] only in DEBUG mode
 if "%APP_DEBUG%" == "" exit /b
 
-setlocal
-if "%APP_DEBUG%" NEQ "" set INFO=Debug mode: ON
-if "%APP_ERROR%" NEQ "" set INFO=%INFO%, ERRORLEVEL: %APP_ERROR%
-if "%INFO%" NEQ "" set INFO=(%INFO%)
-
 echo.
-echo [%~1] %INFO%
+echo [%~nx1]
+echo File: %1
+echo Args: %2 %3 %4 %5 %6 %7 %8 %9
+if "%APP_ERROR%" NEQ "" echo ERRORLEVEL: %APP_ERROR%

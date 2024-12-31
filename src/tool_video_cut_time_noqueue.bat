@@ -10,7 +10,7 @@ REM ===========================================================================
 setlocal
 pushd %~dp0
 call _config.bat
-call _header.bat "%~nx0"
+call _header.bat %0 %*
 
 set "INFILE=%~1"
 
