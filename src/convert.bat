@@ -7,10 +7,10 @@ REM This file is part of orkan/ffmpeg package
 REM Copyright (c) 2021 Orkan <orkans+ffmpeg@gmail.com>
 REM ===========================================================================
 
-REM Let _status.bat return immediately after each tool_*.bat
+REM Global NOWAIT - always pause after error in sub-tool
 set APP_NOWAIT=%~n0
 
-REM Set before setlocal! See :end
+REM Remember main-tool NOWAIT after endlocal
 set "NOWAIT=%~2"
 
 setlocal
@@ -90,9 +90,10 @@ exit /b %ERRORLEVEL%
 
 REM ===========================================================================
 REM Functions:
+
 REM ---------------------------------------------------------------------------
+REM Run each echoed line from files-*.bat
 :config
-REM Loop over each echoed line
 set PROGRESS=0
 for /f "tokens=*" %%a in ( 'call %1' ) do (
 	call :start %2 %%a || exit /b %ERRORLEVEL%
@@ -104,6 +105,7 @@ if %PROGRESS% == 0 (
 exit /b 0
 
 REM ---------------------------------------------------------------------------
+REM Get absolute path fo files-*.bat
 :filesAbs
 set CONVERT_FILES_ABS=%~f$APP_TOOLS_PATH:1
 if not exist "%CONVERT_FILES_ABS%" (
@@ -115,11 +117,11 @@ if "%APP_DEBUG%" NEQ "" echo [%~n0] Located FILES "%~1" at "%CONVERT_FILES_ABS%"
 exit /b 0
 
 REM ---------------------------------------------------------------------------
-:start
 REM Loop over each parameter from echoed line
 REM To allow exclamation mark "!" in filenames we must DisableDelayedExpansion here
 REM and in every submodule where %INFILE% is used
 REM The drawback is that we cannot set variables in parentheses now
+:start
 for %%f in (%3) do (
 	set /a PROGRESS+=1
 
@@ -150,4 +152,3 @@ REM ---------------------------------------------------------------------------
 :showTitleDefault
 TITLE [CONVERT] %~nx1 - "%~1"
 goto :eof
-

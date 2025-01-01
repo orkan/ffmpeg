@@ -26,8 +26,10 @@ if %STATUS_ERRORLEVEL% == 0 (
 ) else (
 	echo.
 	echo BUILD FAILED ^(%STATUS_ERRORLEVEL%^)
-	echo.
+	REM Clear ERRORLEVEL
+	REM ver > nul
 	REM Always pause on errors!
+	echo.
 )
 
 pause

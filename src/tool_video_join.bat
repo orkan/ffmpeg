@@ -31,7 +31,6 @@ for %%E in (%EXTS%) do call :setEXT %%E || goto :start
 call :err "No supported video files found"
 goto :end
 
-
 REM ---------------------------------------------------------------------------
 :start
 if "%NOWAIT%" == "" (
@@ -46,7 +45,7 @@ type nul > "%OUTDIR%\%OUTFILE%"
 echo.
 echo Join:
 for %%F in (%FILES%) do (
-	call :join "%%~F" || exit /b %ERRORLEVEL%
+	call :join "%%~F" || goto :end
 )
 
 echo.
@@ -64,6 +63,7 @@ REM ===========================================================================
 REM Functions:
 
 REM ---------------------------------------------------------------------------
+REM Join vids in current dir
 :join
 set /a CUR+=1
 echo [%CUR%/%TOT%] "%~nx1"
@@ -72,10 +72,11 @@ if "%APP_DEBUG%" NEQ "" echo copy /b "%OUTFILE%" + %1
 REM Note: copy needs output dir set to current dir!
 copy /b "%OUTFILE%" + %1 >nul
 popd
-exit /b 0
+exit /b %ERRORLEVEL%
 
 REM ---------------------------------------------------------------------------
 :setEXT
+REM Find supported vids in current dir. First found extension wins!
 echo.
 echo Files: *.%1
 for /F "tokens=*" %%F in ('dir /b /a:-d /o:n *.%1') do (call :setFILES "%CD%\%%~F")
@@ -84,12 +85,14 @@ set EXT=%1
 exit /b 100
 
 REM ---------------------------------------------------------------------------
+REM Build list of video files to join
 :setFILES
 set /a TOT+=1
 echo %TOT%. "%~nx1"
 set FILES=%FILES%;%1
 goto :eof
 
+REM ---------------------------------------------------------------------------
 :err
 echo.
 echo %~1. Bye!

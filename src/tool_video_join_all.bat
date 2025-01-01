@@ -1,16 +1,16 @@
 @echo off
 
-REM Let _status.bat return immediately after each tool_*.bat
+REM Global NOWAIT - always pause after error in sub-tool
 set APP_NOWAIT=%~n0
 
-REM Set before setlocal! See :end
-set "NOWAIT=%~3"
+REM Remember main-tool NOWAIT after endlocal
+set "NOWAIT=%~2"
 
-setlocal
 pushd %~dp0
 call _config.bat
 call _header.bat %0 %*
 
+setlocal
 set "OUTDIR=%~1"
 set "EXTS=%~2"
 REM set "NOWAIT=%~3" // @see above
@@ -56,7 +56,7 @@ echo.
 pause
 
 for %%D in (%DIRS%) do (
-	call :join "%%~D" || exit /b %ERRORLEVEL%
+	call :join "%%~D" || goto :end
 )
 
 call :showTitleDefault "%INDIR%"
@@ -71,20 +71,22 @@ set APP_NOWAIT=
 call _status.bat "%NOWAIT%"
 exit /b %ERRORLEVEL%
 
-REM ======================================================
+REM ===========================================================================
 REM Functions:
 
 REM ---------------------------------------------------------------------------
+REM Call join tool in current sub-dir
 :join
 set /a CUR+=1
 call :showTitle %1
 echo.
 echo [%CUR%/%TOT%] %~nx1
 set COMMAND=%~dp0tool_video_join.bat "%OUTDIR%" "%EXTS%" nowait %1
-call %COMMAND% || exit /b %ERRORLEVEL%
-goto :eof
+call %COMMAND%
+exit /b %ERRORLEVEL%
 
 REM ---------------------------------------------------------------------------
+REM Get list of sub-dirs to proccess
 :setDIRS
 set /a TOT+=1
 set DIRS=%DIRS%;%1
