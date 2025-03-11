@@ -66,7 +66,7 @@ REM ---------------------------------------------------------------------------
 REM Join vids in current dir
 :join
 set /a CUR+=1
-echo [%CUR%/%TOT%] "%~nx1"
+echo [%CUR%:%TOT%] "%~nx1"
 pushd %OUTDIR%
 if "%APP_DEBUG%" NEQ "" echo copy /b "%OUTFILE%" + %1
 REM Note: copy needs output dir set to current dir!
@@ -88,7 +88,7 @@ REM ---------------------------------------------------------------------------
 REM Build list of video files to join
 :setFILES
 set /a TOT+=1
-echo %TOT%. "%~nx1"
+echo %TOT%: "%~nx1"
 set FILES=%FILES%;%1
 goto :eof
 

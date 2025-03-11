@@ -46,7 +46,7 @@ set CUR=0
 
 call :showTitleDefault "%INDIR%"
 echo.
-echo Queue subfolders:
+echo Subfolders:
 for /D %%D in ("%INDIR%\*") do (
 	call :setDIRS "%%~D"
 )

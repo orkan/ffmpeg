@@ -155,8 +155,7 @@ if "%WAIT_SHOW%" == "" (
 	echo Waiting for previous thread to finish...
 	set WAIT_SHOW=1
 )
-REM Pause for X sec
-ping 127.0.0.1 -n %1 > nul
+timeout /T %1 /NOBREAK > nul
 goto :eof
 
 REM ---------------------------------------------------------------------------
