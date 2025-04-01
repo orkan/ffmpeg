@@ -36,8 +36,8 @@ call _inputfile.bat "%INFILE%" silent || goto :end
 
 REM ---------------------------------------------------------------------------
 REM User:
-set /p START=Start time [0:0:0]: 
-set /p END=End time [End of video]: 
+set /p START=Start time   [00:00:00]: 
+set /p   END=End time [End of video]: 
 
 for /f "tokens=*" %%x in ( 'call _timestamp.bat "%START%" "00:00:00"' ) do set START=%%x
 for /f "tokens=*" %%x in ( 'call _timestamp.bat "%END%"' ) do set END=%%x
