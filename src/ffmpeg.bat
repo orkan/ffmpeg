@@ -34,18 +34,12 @@ set COMMAND=%FFMPEG_EXE_ABS% %*
 
 echo.
 echo %COMMAND%
+echo.
 
 if "%APP_ERROR%" NEQ "" (
 	echo [%~n0] Exit code: "%APP_ERROR%"
 	exit /b %APP_ERROR%
 )
 
-if "%APP_DEBUG%" == "" (
-	echo.
-	%COMMAND% || goto :end
-)
-
-REM ---------------------------------------------------------------------------
-REM Finalize:
-:end
+if "%APP_DEBUG%" == "" %COMMAND%
 exit /b %ERRORLEVEL%

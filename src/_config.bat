@@ -22,7 +22,7 @@ set "APP_NAME=ork-ffmpeg"
 set "APP_URL=https://github.com/orkan/ffmpeg"
 set "APP_EMAIL=Orkan <orkans+ffmpeg@gmail.com>"
 set "APP_YEAR=2021-2025"
-set "APP_VERSION=2.7.6"
+set "APP_VERSION=2.7.7"
 set "APP_VERSION_MIN=2.7"
 set "APP_LONGNAME=%APP_NAME% v%APP_VERSION%"
 
